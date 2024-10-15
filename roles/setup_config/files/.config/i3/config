@@ -1,0 +1,108 @@
+# i3 Config
+
+### General ###
+
+set $mod Mod4
+
+# Init Exec
+exec_always killall -q polybar; polybar -q main -c ~/.config/polybar/config.ini &  # Polybar
+exec_always feh --bg-fill /usr/share/backgrounds/background.jpg                    # Background
+exec_always --no-startup-id nm-applet                                              # NetworkManager
+exec_always --no-startup-id vmware-user                                            # VMWare
+exec_always --no-startup-id setxkbmap es                                           # Keyboard Layout
+
+# Font
+font pango:Classic Console Neue 10
+
+# No borders
+hide_edge_borders smart
+new_window pixel 0
+
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+# Allocate applications
+for_window [class="firefox-esr"]    move to workspace $ws2
+for_window [class="burp-StartBurp"] move to workspace $ws3
+
+
+### Keybindings ###
+
+bindsym $mod+Shift+r restart
+bindsym $mod+space   exec --no-startup-id dmenu_run
+bindsym $mod+Return  exec --no-startup-id kitty
+bindsym $mod+f       exec --no-startup-id firefox-esr
+bindsym $mod+b       exec --no-startup-id burpsuite
+bindsym F1           exec --no-startup-id ~/.config/scripts/fkeys.sh 1
+bindsym F2           exec --no-startup-id ~/.config/scripts/fkeys.sh 2
+bindsym F3           exec --no-startup-id ~/.config/scripts/fkeys.sh 3
+bindsym F4           exec --no-startup-id ~/.config/scripts/fkeys.sh 4
+
+# Volume
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Kill window
+bindsym $mod+w kill
+
+# Focus window
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# Move windows
+floating_modifier $mod
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# Resize Windows
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Layout
+bindsym $mod+Shift+l layout toggle split
+bindsym $mod+Shift+f floating toggle
+bindsym $mod+F11     fullscreen toggle
+
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+
+# Move to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9

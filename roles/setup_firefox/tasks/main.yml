@@ -1,0 +1,52 @@
+---
+- name: Uninstall Firefox
+  ansible.builtin.apt:
+    name: firefox-esr
+    state: absent
+    purge: true
+    autoremove: true
+  become: true
+
+- name: "Remove firefox files"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/usr/lib/firefox-esr"
+    - "/usr/share/firefox-esr/"
+    - "{{ ansible_env.HOME }}/.mozilla"
+  become: true
+
+- name: Reinstall Firefox
+  ansible.builtin.apt:
+    name: firefox-esr
+    state: present
+    update_cache: true
+  become: true
+
+- name: "Set up Firefox policies.json"
+  ansible.builtin.template:
+    src: templates/policies.json.j2
+    dest: /usr/share/firefox-esr/distribution/policies.json
+    owner: root
+    group: root
+    mode: '644'
+  become: true
+
+- name: "Set up Firefox autoconfig.js"
+  ansible.builtin.copy:
+    src: files/autoconfig.js
+    dest: /usr/lib/firefox-esr/defaults/pref/autoconfig.js
+    owner: root
+    group: root
+    mode: '644'
+  become: true
+
+- name: "Set up Firefox mozilla.cfg"
+  ansible.builtin.copy:
+    src: files/mozilla.cfg
+    dest: /usr/lib/firefox-esr/mozilla.cfg
+    owner: root
+    group: root
+    mode: '644'
+  become: true

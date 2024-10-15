@@ -1,0 +1,23 @@
+---
+- name: "Import package list"
+  ansible.builtin.include_vars: apt.yml
+
+- name: "Update"
+  ansible.builtin.apt:
+    update_cache: true
+    # upgrade: "yes"
+  become: true
+
+- name: "Install packages"
+  ansible.builtin.apt:
+    pkg: "{{ item }}"
+  loop: "{{ install_packages_apt }}"
+  loop_control:
+    label: " {{ item }}"
+  become: true
+
+- name: "Clean up"
+  ansible.builtin.apt:
+    autoremove: true
+    autoclean: true
+  become: true

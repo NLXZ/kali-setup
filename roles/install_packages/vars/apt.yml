@@ -1,0 +1,34 @@
+---
+install_packages_apt:
+  - bat
+  - bloodhound
+  - chisel
+  - dmenu
+  - feh
+  - flameshot
+  - fuse
+  - fzf
+  - gdb
+  - gdb-peda
+  - gobuster
+  - golang
+  - i3blocks
+  - jq
+  - kitty
+  - lftp
+  - lsd
+  - ltrace
+  - lxappearance
+  - moreutils
+  - npm
+  - ntpdate
+  - obsidian
+  - papirus-icon-theme
+  - polybar
+  - rdate
+  - remmina
+  - rofi
+  - seclists
+  - sshpass
+  - strace
+  - xsel

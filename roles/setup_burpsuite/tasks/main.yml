@@ -1,0 +1,43 @@
+---
+- name: "Launch BurpSuite in headless mode"
+  ansible.builtin.shell: |
+    set -o pipefail
+    bash -c 'yes y | bash <(cat $(which burpsuite) | sed "s/-jar/-Djava.awt.headless=true -jar/")' &
+  async: 30
+  poll: 0
+  changed_when: false
+
+- name: "Wait for BurpSuite to start"
+  ansible.builtin.wait_for:
+    port: 8080
+    host: 127.0.0.1
+    state: started
+
+- name: "Download BurpSuite certificate"
+  ansible.builtin.get_url:
+    url: "http://127.0.0.1:8080/cert"
+    dest: "/tmp/cacert.der"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: '644'
+  register: result
+  retries: 5
+  delay: 3
+  until: result.status_code == 200
+
+- name: "Set up BurpSuite configuration"
+  ansible.builtin.copy:
+    src: "files/UserConfigCommunity.json"
+    dest: "{{ ansible_env.HOME }}/.BurpSuite/UserConfigCommunity.json"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: '644'
+
+- name: "Copy certificate to /usr/local/share/ca-certificates/"
+  ansible.builtin.copy:
+    src: /tmp/cacert.der
+    dest: /usr/local/share/ca-certificates/burpsuite_ca.der
+    owner: root
+    group: root
+    mode: '644'
+  become: true

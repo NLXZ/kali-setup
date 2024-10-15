@@ -1,0 +1,6 @@
+---
+setup_config_users:
+  - user: "{{ ansible_env.USER }}"
+    home: "{{ ansible_env.HOME }}"
+  - user: "root"
+    home: "/root"

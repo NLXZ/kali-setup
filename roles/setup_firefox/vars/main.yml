@@ -1,0 +1,141 @@
+---
+setup_firefox_plugins:
+  - "foxyproxy-standard"
+  - "wappalyzer"
+  - "darkreader"
+  - "ublock-origin"
+  - "bitwarden-password-manager"
+
+setup_firefox_bookmarks:
+  - Title: "AnyRun"
+    URL: "https://any.run/"
+    Placement: "toolbar"
+    Folder: "MalwareScan"
+
+  - Title: "Hybrid Analysis"
+    URL: "https://www.hybrid-analysis.com/"
+    Placement: "toolbar"
+    Folder: "MalwareScan"
+
+  - Title: "FileScan"
+    URL: "https://www.filescan.io/scan"
+    Placement: "toolbar"
+    Folder: "MalwareScan"
+
+  - Title: "Virus Total"
+    URL: "https://www.virustotal.com/gui/home/upload"
+    Placement: "toolbar"
+    Folder: "MalwareScan"
+
+  - Title: "Hunter.io"
+    URL: "https://hunter.io/search"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "Phonebook.cz"
+    URL: "https://phonebook.cz/"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "Verify Email Address"
+    URL: "https://www.verifyemailaddress.org/"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "Email Checker"
+    URL: "https://email-checker.net/"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "DeHashed"
+    URL: "https://www.dehashed.com/"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "PimEyes"
+    URL: "https://pimeyes.com/es"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "BuiltWith"
+    URL: "https://builtwith.com/"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "Pentest Tools"
+    URL: "https://pentest-tools.com/"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "Exploit-DB"
+    URL: "https://www.exploit-db.com/"
+    Placement: "toolbar"
+    Folder: "Recon"
+
+  - Title: "InfoSec Machines"
+    URL: "https://infosecmachines.io/"
+    Placement: "toolbar"
+    Folder: "Machines"
+
+  - Title: "Github - Vulhub"
+    URL: "https://github.com/vulhub/vulhub"
+    Placement: "toolbar"
+    Folder: "Machines"
+
+  - Title: "VulnHub"
+    URL: "https://www.vulnhub.com/"
+    Placement: "toolbar"
+    Folder: "Machines"
+
+  - Title: "Hack The Box"
+    URL: "https://app.hackthebox.com/"
+    Placement: "toolbar"
+    Folder: "Machines"
+
+  - Title: "JWT"
+    URL: "https://jwt.io/"
+    Placement: "toolbar"
+    Folder: "Crypto"
+
+  - Title: "CyberChef"
+    URL: "https://gchq.github.io/CyberChef/"
+    Placement: "toolbar"
+    Folder: "Crypto"
+
+  - Title: "CrackStation"
+    URL: "https://crackstation.net/"
+    Placement: "toolbar"
+    Folder: "Crypto"
+
+  - Title: "Hashes.com"
+    URL: "https://hashes.com/en/decrypt/hash"
+    Placement: "toolbar"
+    Folder: "Crypto"
+
+  - Title: "RevShells"
+    URL: "https://www.revshells.com/"
+    Placement: "toolbar"
+
+  - Title: "Pentest Monkey"
+    URL: "https://pentestmonkey.net/"
+    Placement: "toolbar"
+
+  - Title: "GTFOBins"
+    URL: "https://gtfobins.github.io/"
+    Placement: "toolbar"
+
+  - Title: "HackTricks"
+    URL: "https://book.hacktricks.xyz/welcome/readme"
+    Placement: "toolbar"
+
+  - Title: "Payloads All The Things"
+    URL: "https://github.com/swisskyrepo/PayloadsAllTheThings"
+    Placement: "toolbar"
+
+  - Title: "Internal All The Things"
+    URL: "https://swisskyrepo.github.io/InternalAllTheThings/"
+    Placement: "toolbar"
+
+  - Title: "PwnBook"
+    URL: "https://villalbanico9.gitbook.io/pwnbook"
+    Placement: "toolbar"
