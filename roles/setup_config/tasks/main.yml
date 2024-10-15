@@ -33,7 +33,7 @@
     mode: '755'
   become: true
 
-- name: "Set up LightDM lockscreen"
+- name: "Set up LightDM"
   ansible.builtin.copy:
     src: files/lightdm/
     dest: /etc/lightdm/
