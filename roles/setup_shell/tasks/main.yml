@@ -16,7 +16,8 @@
     mode: '755'
 
 - name: "Install Oh My Zsh"
-  ansible.builtin.shell: "su {{ item.user }} -c 'unset ZSH && sh /tmp/ohmyzsh.sh'"
+  ansible.builtin.shell: |
+    su {{ item.user }} -c 'unset ZSH && sh /tmp/ohmyzsh.sh'
   args:
     creates: "{{ item.home }}/.oh-my-zsh"
   loop: "{{ setup_shell_users }}"

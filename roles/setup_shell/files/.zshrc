@@ -1,9 +1,7 @@
 # .zshrc
 
-# Oh My Zsh
-export ZSH="$HOME/.oh-my-zsh"
-
 # Globals
+export ZSH="$HOME/.oh-my-zsh"
 export EDITOR=nvim
 export WORDCHARS=${WORDCHARS//*}
 export NUSER=$(getent passwd 1000 | cut -d: -f1)
@@ -27,20 +25,22 @@ function precmd() {
 }
 
 # Alias
-alias sudo='sudo '
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
-alias ip='ip --color=auto'
+alias sudo='sudo '
 alias ls='lsd'
-alias ll='ls -lh --group-dirs=first --icon=never'
-alias la='ls -a --group-dirs=first --icon=never'
-alias ls='ls --group-dirs=first --icon=never'
-alias cat='batcat --style=plain --paging=never'
+alias cat='batcat'
 alias vim='nvim'
-alias docker-prune='docker rm -f $(docker ps -a -q) &>/dev/null; docker rmi $(docker images -a -q) &>/dev/null; docker network prune -f &>/dev/null; docker volume prune -f &>/dev/null; echo "[!] Docker containers, images, networks, and volumes correctly removed."'
 alias cdw='cd $WORKDIR'
 alias mkw='kitty --session workspace'
 alias target='echo $@ > /home/$NUSER/.target'
-alias list-ports='grep -oP '^\d{1,5}(?=/.*open)' "$1" | paste -sd,'
-alias stty-size='read r c < <(stty size | awk '\''{print $1, $2}'\'') && echo "stty rows $r columns $c"'
+alias list-ports='grep -oP "^\d{1,5}(?=/.*open)" "$1" | paste -sd,'
+alias stty-size='stty size | read r c && echo "stty rows $r columns $c"'
 alias alert='sleep $1; beep -r 2'
+
+# Functions
+function docker-clean () {
+    sudo systemctl stop docker.*
+    sudo rm -rf /var/lib/docker/*
+    echo "[!] Docker cleaned up."
+}

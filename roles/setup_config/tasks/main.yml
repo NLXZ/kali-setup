@@ -48,15 +48,10 @@
     enabled: true
   become: true
 
-- name: Remove python EXTERNALLY-MANAGED files
-  ansible.builtin.shell: |
-    find / -name EXTERNALLY-MANAGED 2>/dev/null -exec rm -rf {} \;
-  changed_when: false
-  become: true
-
 - name: "Create config files for root"
   ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/.config"
     dest: /root/.config
     state: link
+    force: true
   become: true
