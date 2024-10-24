@@ -2,7 +2,7 @@
 - name: "Clone dotfiles"
   ansible.builtin.git:
     repo: "https://github.com/NLXZ/dotfiles.git"
-    dest: "/tmp"
+    dest: "/tmp/dotfiles"
     clone: "yes"
     version: main
 
@@ -50,7 +50,7 @@
 
 - name: Remove python EXTERNALLY-MANAGED files
   ansible.builtin.shell: |
-    find / -name "EXTERNALLY-MANAGED" -exec rm -rf {} \; 2>/dev/null
+    find / -name EXTERNALLY-MANAGED 2>/dev/null -exec rm -rf {} \;
   changed_when: false
   become: true
 

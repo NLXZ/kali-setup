@@ -26,7 +26,6 @@ install_packages_apt:
   - npm
   - ntpdate
   - obsidian
-  - papirus-icon-theme
   - polybar
   - rdate
   - remmina
