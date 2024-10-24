@@ -14,7 +14,6 @@
     group: "{{ ansible_env.USER }}"
     mode: '755'
 
-
 - name: "Set up background"
   ansible.builtin.copy:
     src: files/background.jpg
@@ -48,10 +47,15 @@
     enabled: true
   become: true
 
+- name: "Set up config directory for root"
+  ansible.builtin.file:
+    path: /root/.config
+    state: absent
+  become: true
+
 - name: "Create config files for root"
   ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/.config"
     dest: /root/.config
     state: link
-    force: true
   become: true
