@@ -1,9 +1,12 @@
 ---
 install_packages_apt:
   - bat
+  - beep
   - bloodhound
   - chisel
   - dmenu
+  - docker-compose
+  - docker.io
   - feh
   - flameshot
   - fuse
