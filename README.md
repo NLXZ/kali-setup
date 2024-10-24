@@ -2,13 +2,13 @@
 
 - Install Ansible
 ```bash
-sudo apt update && sudo apt install ansible -y
+sudo apt update && sudo apt install ansible-core -y
 ```
 
 - Clone the repository and run the playbook
 ```bash
-git clone https://github.com/NLXZ/dotfiles.git
-cd dotfiles
+git clone https://github.com/NLXZ/kali-setup.git
+cd kali-setup
 ansible-playbook -K main.yml
 ```
 
