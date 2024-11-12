@@ -2,3 +2,5 @@
 install_packages_git:
   - kerbrute: "https://github.com/ropnop/kerbrute/releases/latest/download/kerbrute_linux_amd64"
   - nvim: "https://github.com/neovim/neovim/releases/latest/download/nvim.appimage"
+  - sliver-server: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-server_linux"
+  - sliver-client: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-client_linux"

@@ -6,7 +6,7 @@ export EDITOR=nvim
 export WORDCHARS=${WORDCHARS//*}
 export NUSER=$(getent passwd 1000 | cut -d: -f1)
 export WORKDIR="/home/$NUSER/Workdir"
-export PATH=/home/$NUSER/bin:/home/$NUSER/.local/bin:/usr/local/bin:/home/$NUSER/.go/bin:$PATH
+export PATH=$PATH:/home/$NUSER/.go/bin
 
 # Plugins
 plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions sudo)
@@ -14,7 +14,7 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # Prompt
-PROMPT='%{$fg[green]%}%~%{$reset_color%} %(!.#.$) '
+PROMPT='%{$fg[blue]%}%~%{$reset_color%} %(!.#.$) '
 DISABLE_AUTO_TITLE="true"
 function precmd() {
     if [ -z "$NEW_LINE_BEFORE_PROMPT" ]; then
@@ -25,20 +25,23 @@ function precmd() {
 }
 
 # Alias
+alias sudo='sudo '
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
-alias sudo='sudo '
 alias ls='lsd'
 alias cat='batcat'
 alias vim='nvim'
 alias cdw='cd $WORKDIR'
-alias mkw='kitty --session workspace'
-alias target='echo $@ > /home/$NUSER/.target'
-alias list-ports='grep -oP "^\d{1,5}(?=/.*open)" "$1" | paste -sd,'
-alias stty-size='stty size | read r c && echo "stty rows $r columns $c"'
-alias alert='sleep $1; beep -r 2'
+alias mkw='kitty --session workspace --detach'
+alias target='echo "$@" > /home/$NUSER/.target'
+alias stty-size='echo "stty rows $(tput lines) columns $(tput cols)"'
+alias sliver='nohup sliver-server daemon &>/dev/null & disown; sliver-client'
 
 # Functions
+function list-ports () {
+    grep -hoP "^\d{1,5}(?=/.*open)" $@ | paste -sd,
+}
+
 function docker-clean () {
     sudo systemctl stop docker.*
     sudo rm -rf /var/lib/docker/*

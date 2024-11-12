@@ -1,0 +1,55 @@
+{
+    "mode": "127.0.0.1:1080",
+    "sync": false,
+    "autoBackup": false,
+    "passthrough": "",
+    "theme": "moonlight alt",
+    "container": {
+      "incognito": "",
+      "container-1": "",
+      "container-2": "",
+      "container-3": "",
+      "container-4": ""
+    },
+    "commands": {
+      "setProxy": "",
+      "setTabProxy": "",
+      "quickAdd": ""
+    },
+    "data": [
+      {
+        "active": true,
+        "title": "BurpSuite",
+        "type": "http",
+        "hostname": "127.0.0.1",
+        "port": "8080",
+        "username": "",
+        "password": "",
+        "cc": "",
+        "city": "",
+        "color": "#ffae0c",
+        "pac": "",
+        "pacString": "",
+        "proxyDNS": true,
+        "include": [],
+        "exclude": []
+      },
+      {
+        "active": true,
+        "title": "SOCKS5",
+        "type": "socks5",
+        "hostname": "127.0.0.1",
+        "port": "1080",
+        "username": "",
+        "password": "",
+        "cc": "",
+        "city": "",
+        "color": "#0be96b",
+        "pac": "",
+        "pacString": "",
+        "proxyDNS": true,
+        "include": [],
+        "exclude": []
+      }
+    ]
+  }

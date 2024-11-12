@@ -8,3 +8,4 @@
     - setup_config
     - setup_burpsuite
     - setup_firefox
+    - manual_tasks
