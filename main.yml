@@ -8,4 +8,9 @@
     - setup_config
     - setup_burpsuite
     - setup_firefox
-    - manual_tasks
+
+- name: "Finished"
+  debug:
+    msg: | 
+      Kali was successfully set up, you can remove this folder and reboot the system:
+      cd ..; rm -rf kali-setup; reboot

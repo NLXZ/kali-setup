@@ -59,3 +59,15 @@
     dest: /root/.config
     state: link
   become: true
+
+- name: "Set up Time Zone"
+  ansible.builtin.timezone:
+    name: Europe/Madrid
+  become: true
+
+- name: "Enable NTP"
+  ansible.builtin.systemd:
+    name: systemd-timesyncd
+    enabled: yes
+    state: started
+  become: true

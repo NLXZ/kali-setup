@@ -1,5 +1,4 @@
 # Set up
-
 - Install Ansible
 ```bash
 sudo apt update && sudo apt install ansible-core -y
@@ -13,10 +12,35 @@ ansible-playbook -K main.yml
 ```
 
 # Change old username
-
-- This script is useful for pre-built VM Kali machines
-> Must to be run as root
-```bash
-sh <(curl -sL https://raw.githubusercontent.com/NLXZ/kali-setup/refs/heads/main/change_username.sh) new_username
+```shell
+bash <(curl -sL https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/ac7c305f29962fe48a821f4dce954b5994f3dfd1/change_username.sh) old_username new_username
 ```
 
+# Manual configurations
+
+## Import FoxyProxy configuration
+- Open Firefox
+- Open FoxyProxy
+- Go to `Import > Import Proxy List`
+- Copy this:
+```
+http://127.0.0.1:8080?color=ff8800&title=BurpSuite
+http://127.0.0.1:1080?color=0088ff&title=Socks
+```
+- Import and save
+
+## Install BurpSuite extensions
+- Open BurpSuite
+- Go to `Extensions > BApp Store`
+- Doble click on `Installed`
+- For each ticked extension click on `Reinstall`
+
+## Set up Neo4j and BloodHound
+- Start Neo4j console:
+```shell
+sudo neo4j console
+```
+- Open `http://localhost:7474/` on Firefox
+- Login `neo4j:neo4j` and set new password
+- Open BloodHound and login `neo4j:new_passwd`
+- Enable `Settings > Dark Mode`
