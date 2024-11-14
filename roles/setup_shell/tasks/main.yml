@@ -17,7 +17,7 @@
 
 - name: "Install Oh My Zsh"
   ansible.builtin.shell: |
-    su {{ item.user }} -c 'unset ZSH; cat /tmp/ohmyzsh.sh | grep -v "zsh -l" | sh'
+    set -o pipefail && su {{ item.user }} -c 'unset ZSH; cat /tmp/ohmyzsh.sh | grep -v "zsh -l" | sh'
   args:
     creates: "{{ item.home }}/.oh-my-zsh"
   loop: "{{ setup_shell_users }}"

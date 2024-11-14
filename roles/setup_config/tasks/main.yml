@@ -61,13 +61,13 @@
   become: true
 
 - name: "Set up Time Zone"
-  ansible.builtin.timezone:
+  community.general.timezone:
     name: Europe/Madrid
   become: true
 
 - name: "Enable NTP"
-  ansible.builtin.systemd:
-    name: systemd-timesyncd
-    enabled: yes
-    state: started
+  ansible.builtin.service:
+    name: ntp
+    state: "started"
+    enabled: true
   become: true
