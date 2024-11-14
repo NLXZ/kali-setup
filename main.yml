@@ -1,21 +1,18 @@
 ---
 - name: "Build Kali Enviroment"
   hosts: localhost
-  connection: local
   roles:
-    - install_packages
-    - setup_shell
-    - setup_config
-    - setup_burpsuite
     - setup_firefox
 
   tasks:
     - name: "Finished"
       ansible.builtin.pause:
-        prompt: "Kali setup complete. Would you like to reboot the system now? (y/N):"
+        prompt: "Kali setup complete. Would you like to reboot the system now? (y/N)"
       register: yn
 
     - name: "Reboot"
-      ansible.builtin.reboot:
-        reboot_timeout: 600
+      ansible.builtin.shell: "nohup -- bash -c 'sleep 3; reboot' &"
+      async: 0
+      poll: 0
       when: yn.user_input == 'y'
+      changed_when: false
