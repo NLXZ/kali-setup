@@ -11,7 +11,11 @@
 
   tasks:
     - name: "Finished"
-      ansible.builtin.debug:
-        msg: |
-          Kali was successfully set up, you can remove this folder and reboot the system:
-          cd ..; rm -rf kali-setup; reboot
+      ansible.builtin.pause:
+        prompt: "Kali setup complete. Would you like to reboot the system now? (y/N):"
+      register: yn
+
+    - name: "Reboot"
+      ansible.builtin.reboot:
+        reboot_timeout: 600
+      when: yn.user_input == 'y'
