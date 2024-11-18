@@ -40,7 +40,7 @@ http://127.0.0.1:1080?color=0088ff&title=Socks
 ```shell
 sudo neo4j console
 ```
-- Open `http://localhost:7474/` on Firefox
+- Open [http://localhost:7474/] on Firefox
 - Login `neo4j:neo4j` and set new password
 - Open BloodHound and login `neo4j:new_passwd`
 - Enable `Settings > Dark Mode`
