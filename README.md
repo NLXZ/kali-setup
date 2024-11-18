@@ -35,13 +35,13 @@ http://127.0.0.1:1080?color=0088ff&title=Socks
 ```shell
 sudo neo4j console
 ```
-- Open [http://localhost:7474/](http://localhost:7474/) on Firefox
+- Open ![http://localhost:7474/](http://localhost:7474/) on Firefox
 - Login `neo4j:neo4j` and set new password
 - Open BloodHound and login `neo4j:new_passwd`
 - Enable `Settings > Dark Mode`
 
 ## Change username
-I made this simple [script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
+I made this simple ![script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
 ```shell
 bash <(curl -sL https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/ac7c305f29962fe48a821f4dce954b5994f3dfd1/change_username.sh) old_username new_username
 ```
