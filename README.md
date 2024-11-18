@@ -11,11 +11,6 @@ cd kali-setup
 ansible-playbook -K main.yml
 ```
 
-# Change old username
-```shell
-bash <(curl -sL https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/ac7c305f29962fe48a821f4dce954b5994f3dfd1/change_username.sh) old_username new_username
-```
-
 # Manual configurations
 
 ## Import FoxyProxy configuration
@@ -44,3 +39,9 @@ sudo neo4j console
 - Login `neo4j:neo4j` and set new password
 - Open BloodHound and login `neo4j:new_passwd`
 - Enable `Settings > Dark Mode`
+
+## Change username
+I made this simple [script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
+```shell
+bash <(curl -sL https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/ac7c305f29962fe48a821f4dce954b5994f3dfd1/change_username.sh) old_username new_username
+```
