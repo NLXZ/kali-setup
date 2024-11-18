@@ -1,3 +1,14 @@
+# Kali Setup
+I created this ansible playbook to automate the process of setting up my Kali Linux ![dotfiles](https://github.com/NLXZ/dotfiles) and configurations.
+
+# Index
+- [Setup](#setup)
+- [Manual configurations](#manual-configurations)
+  - [Import FoxyProxy configuration](#import-foxyproxy-configuration)
+  - [Install BurpSuite extensions](#install-burpSuite-extensions)
+  - [Setup Neo4j and BloodHound](#setup-neo4j-and-bloodHound)
+  - [Change username](#change-username)
+
 # Setup
 - Install Ansible
 ```bash
@@ -30,7 +41,7 @@ http://127.0.0.1:1080?color=0088ff&title=Socks
 - Doble click on `Installed`
 - For each ticked extension click on `Reinstall`
 
-## Set up Neo4j and BloodHound
+## Setup Neo4j and BloodHound
 - Start Neo4j console:
 ```shell
 sudo neo4j console
