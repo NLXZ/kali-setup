@@ -2,6 +2,10 @@
 - name: "Build Kali Enviroment"
   hosts: localhost
   roles:
+    - install_packages
+    - setup_shell
+    - setup_config
+    - setup_burpsuite
     - setup_firefox
 
   tasks:

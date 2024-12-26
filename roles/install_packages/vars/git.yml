@@ -4,3 +4,4 @@ install_packages_git:
   - nvim: "https://github.com/neovim/neovim/releases/latest/download/nvim.appimage"
   - sliver-server: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-server_linux"
   - sliver-client: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-client_linux"
+  - docker-compose: "https://github.com/docker/compose/releases/download/v2.32.0/docker-compose-linux-x86_64"
