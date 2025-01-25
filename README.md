@@ -12,7 +12,10 @@ I created this ansible playbook to automate the process of setting up my Kali Li
 # Setup
 - Install Ansible
 ```bash
-sudo apt update && sudo apt install ansible-core -y
+sudo apt update
+sudo apt install pipx -y
+pipx ensurepath
+pipx install ansible-core
 ```
 
 - Clone the repository and run the playbook
