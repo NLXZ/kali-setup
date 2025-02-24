@@ -57,5 +57,5 @@ sudo neo4j console
 ## Change username
 I made this simple ![script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
 ```shell
-bash <(curl -sL https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/ac7c305f29962fe48a821f4dce954b5994f3dfd1/change_username.sh) old_username new_username
+bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/b911bb2f77a490819980903361ebc2c37c204298/change_username.sh) old_username new_username
 ```

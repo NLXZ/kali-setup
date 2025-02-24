@@ -61,9 +61,10 @@
   become: true
 
 - name: "Set up Time Zone"
-  community.general.timezone:
-    name: Europe/Madrid
+  ansible.builtin.shell: |
+    timedatectl set-timezone Europe/Madrid
   become: true
+  changed_when: false
 
 - name: "Enable NTP"
   ansible.builtin.service:
