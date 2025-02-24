@@ -16,8 +16,8 @@
 
 - name: "Set up background"
   ansible.builtin.copy:
-    src: files/background.jpg
-    dest: /usr/share/backgrounds/background.jpg
+    src: files/background.png
+    dest: /usr/share/backgrounds/background.png
     owner: root
     group: root
     mode: '755'
