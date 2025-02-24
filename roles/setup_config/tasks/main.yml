@@ -60,15 +60,10 @@
     state: link
   become: true
 
-- name: "Set up Time Zone"
+- name: "Set up Time Zone and NTP"
   ansible.builtin.shell: |
     timedatectl set-timezone Europe/Madrid
+    timedatectl set-ntp 1
   become: true
   changed_when: false
 
-- name: "Enable NTP"
-  ansible.builtin.service:
-    name: ntp
-    state: "started"
-    enabled: true
-  become: true
