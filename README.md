@@ -78,7 +78,7 @@ echo "BLOODHOUND_PORT=8888" | sudo tee .env
 sudo ./bloodhound-cli install
 ```
 - Usage  
->I configured a function on my .zshrc to start and stop the service just by running: 
+>I configured a function on my .zshrc to start and stop the service just by running:  
 `bloodhound start | stop | status`
 ```shell
 function bloodhound {
