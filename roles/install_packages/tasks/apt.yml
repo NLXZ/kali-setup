@@ -10,12 +10,13 @@
     pkg:
       - bat
       - beep
-      - bloodhound
+      - bloodyad
       - chisel
       - dmenu
       - docker.io
       - feh
       - flameshot
+      - fonts-jetbrains-mono
       - fuse
       - fzf
       - gdb
@@ -24,7 +25,8 @@
       - gobuster
       - golang
       - i3blocks
-      - fonts-jetbrains-mono
+      - krb5-user
+      - krb5-config
       - jq
       - kitty
       - lftp
@@ -32,6 +34,7 @@
       - ltrace
       - lxappearance
       - moreutils
+      - netexec
       - npm
       - ntpdate
       - obsidian
