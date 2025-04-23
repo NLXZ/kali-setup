@@ -57,10 +57,15 @@
     state: link
   become: true
 
+- name: "Set up keyboard layout"
+  ansible.builtin.shell: |
+    sed -i 's/XKBLAYOUT="us"/XKBLAYOUT="es"/' /etc/default/keyboard
+  changed_when: false
+  become: true
+
 - name: "Set up Time Zone and NTP"
   ansible.builtin.shell: |
     timedatectl set-timezone Europe/Madrid
     timedatectl set-ntp 1
   changed_when: false
   become: true
-

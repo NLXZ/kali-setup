@@ -7,7 +7,7 @@
 
 - name: "Install packages"
   ansible.builtin.apt:
-    pkg: 
+    pkg:
       - bat
       - beep
       - bloodhound

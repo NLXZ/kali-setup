@@ -1,12 +1,4 @@
 ---
-- name: Uninstall Firefox
-  ansible.builtin.apt:
-    name: firefox-esr
-    state: absent
-    purge: true
-    autoremove: true
-  become: true
-
 - name: "Remove firefox files"
   ansible.builtin.file:
     path: "{{ item }}"
@@ -18,10 +10,10 @@
   become: true
 
 - name: Reinstall Firefox
-  ansible.builtin.apt:
-    name: firefox-esr
-    state: present
-    update_cache: true
+  ansible.builtin.shell: |
+    set -o pipefail
+    sudo apt-get reinstall firefox-esr
+  changed_when: false
   become: true
 
 - name: "Set up Firefox policies.json"
