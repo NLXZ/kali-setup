@@ -58,9 +58,10 @@
   become: true
 
 - name: "Set up keyboard layout"
-  ansible.builtin.shell: |
-    sed -i 's/XKBLAYOUT="us"/XKBLAYOUT="es"/' /etc/default/keyboard
-  changed_when: false
+  ansible.builtin.lineinfile:
+    path: /etc/default/keyboard
+    regexp: '^XKBLAYOUT="us"$'
+    line: 'XKBLAYOUT="es"'
   become: true
 
 - name: "Set up Time Zone and NTP"
