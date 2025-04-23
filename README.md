@@ -20,7 +20,7 @@ I made this simple [script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f
 - Run this:
 ```shell
 # Check it copied correctly and set your new username
-bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/b911bb2f77a490819980903361ebc2c37c204298/change_username.sh) kali new_username
+bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/0865987d1524c5bb5c7cc02eb60385544808fb5e/change-username.sh) kali new_username
 ```
 - Change user password
 
