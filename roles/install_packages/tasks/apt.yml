@@ -10,6 +10,7 @@
     pkg:
       - bat
       - beep
+      - bloodhound-ce-python
       - bloodyad
       - chisel
       - dmenu
@@ -25,10 +26,10 @@
       - gobuster
       - golang
       - i3blocks
-      - krb5-user
-      - krb5-config
       - jq
       - kitty
+      - krb5-config
+      - krb5-user
       - lftp
       - lsd
       - ltrace

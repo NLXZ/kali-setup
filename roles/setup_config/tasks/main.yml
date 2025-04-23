@@ -25,7 +25,9 @@
 
 - name: "Set up NeoVim"
   ansible.builtin.shell: |
-    /usr/bin/nvim -c ':PackerSync' +qa
+    /usr/bin/nvim -c ':PackerSync'
+  async: 30
+  poll: 0
   changed_when: false
   become: true
 
