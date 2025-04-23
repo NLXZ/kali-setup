@@ -77,7 +77,7 @@ echo "BLOODHOUND_PORT=8888" | sudo tee .env
 ```shell
 sudo ./bloodhound-cli install
 ```
-- Usage
+- Usage  
 I configured a function to start and stop the service just by running: `bloodhound start | stop | status`
 ```shell
 function bloodhound {
