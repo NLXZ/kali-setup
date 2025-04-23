@@ -27,6 +27,51 @@ setup_firefox_bookmarks:
     Placement: "toolbar"
     Folder: "Malware"
 
+  - Title: "Temp Mail IO"
+    URL: "https://temp-mail.io/"
+    Placement: "toolbar"
+    Folder: "Temp Mails"
+
+  - Title: "Temp Mail ORG"
+    URL: "https://temp-mail.org/"
+    Placement: "toolbar"
+    Folder: "Temp Mails"
+
+  - Title: "SMS Online"
+    URL: "https://sms-online.co/receive-free-sms"
+    Placement: "toolbar"
+    Folder: "Temp SMS"
+
+  - Title: "Recieve SMSs"
+    URL: "https://receive-smss.com/"
+    Placement: "toolbar"
+    Folder: "Temp SMS"
+
+  - Title: "Recieve SMS free"
+    URL: "https://receive-sms-free.cc/"
+    Placement: "toolbar"
+    Folder: "Temp SMS"
+
+  - Title: "Anonym SMS"
+    URL: "https://anonymsms.com/"
+    Placement: "toolbar"
+    Folder: "Temp SMS"
+
+  - Title: "Temp SMS"
+    URL: "https://temp-sms.org/"
+    Placement: "toolbar"
+    Folder: "Temp SMS"
+
+  - Title: "Quackr"
+    URL: "https://quackr.io/temporary-numbers"
+    Placement: "toolbar"
+    Folder: "Temp SMS"
+
+  - Title: "WebHook Site"
+    URL: "https://webhook.site/"
+    Placement: "toolbar"
+    Folder: "Web Hooks"
+
   - Title: "Internal All The Things"
     URL: "https://swisskyrepo.github.io/InternalAllTheThings/"
     Placement: "toolbar"
@@ -92,6 +137,11 @@ setup_firefox_bookmarks:
     Placement: "toolbar"
     Folder: "Windows"
 
+  - Title: "AppLocker ByPass"
+    URL: "https://github.com/api0cradle/UltimateAppLockerByPassList/"
+    Placement: "toolbar"
+    Folder: "Windows"
+
   - Title: "Privilege Escalation - HackTricks"
     URL: "https://book.hacktricks.wiki/en/linux-hardening/linux-privilege-escalation-checklist.html"
     Placement: "toolbar"
@@ -133,7 +183,7 @@ setup_firefox_bookmarks:
     Folder: "Crypt"
 
   - Title: "Payload All The Things"
-    URL: ""
+    URL: "https://swisskyrepo.github.io/PayloadsAllTheThings/"
     Placement: "toolbar"
     Folder: "Web"
 
