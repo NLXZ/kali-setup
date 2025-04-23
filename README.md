@@ -12,7 +12,7 @@ I created this ansible playbook to automate the process of setting up my Kali Li
 
 # Setup
 ## Change username
-I made this simple ![script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
+I made this simple [script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
 - Press `Ctrl + Alt + F1`
 - Login as kali
 - Change root password
@@ -70,7 +70,7 @@ cd /opt/bloodhound
 ```
 - Change password and port
 ```shell
-sudo ./bloodhound-cli config set default_admin.password '<password>'
+sudo ./bloodhound-cli config set default_admin.password 'password'
 echo "BLOODHOUND_PORT=8888" | sudo tee .env
 ```
 - Build
