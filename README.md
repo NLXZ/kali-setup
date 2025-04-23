@@ -1,16 +1,31 @@
 # Kali Setup
-I created this ansible playbook to automate the process of setting up my Kali Linux ![dotfiles](https://github.com/NLXZ/dotfiles) and configurations.
+I created this ansible playbook to automate the process of setting up my Kali Linux [dotfiles](https://github.com/NLXZ/dotfiles) and configurations.
 
 # Index
 - [Setup](#setup)
+  - [Change username](#change-username)
+  - [Automatic configuration script](#automatic-configuration-script)
 - [Manual configurations](#manual-configurations)
   - [Import FoxyProxy configuration](#import-foxyproxy-configuration)
   - [Install BurpSuite extensions](#install-burpSuite-extensions)
   - [Setup Neo4j and BloodHound](#setup-neo4j-and-bloodHound)
-  - [Change username](#change-username)
 
 # Setup
-- Install Ansible
+## Change username
+I made this simple ![script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
+- Press `Ctrl + Alt + F1`
+- Login as kali
+- Change root password
+- Log off and relogin as root
+- Run this:
+```shell
+# Check it copied correctly and set your new username
+bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/b911bb2f77a490819980903361ebc2c37c204298/change_username.sh) kali new_username
+```
+- Change user password
+
+## Automatic configuration script
+- Install ansible
 ```bash
 sudo apt update
 sudo apt install pipx -y
@@ -44,27 +59,36 @@ http://127.0.0.1:1080?type=socks5&color=0088ff&title=Socks
 - Doble click on `Installed`
 - For each ticked extension click on `Reinstall`
 
-## Setup Neo4j and BloodHound
-- Start Neo4j console:
+## Setup BloodHound
+- Download BloodHound
 ```shell
-sudo -v && sudo neo4j console & sleep 3 && xdg-open http://localhost:7474/ && bloodhound && kill
+sudo mkdir -p /opt/bloodhound
+wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz
+sudo tar -xvzf bloodhound-cli-linux-amd64.tar.gz -C /opt/bloodhound
+rm -f bloodhound-cli-linux-amd64.tar.gz
+cd /opt/bloodhound
 ```
-- Open ![http://localhost:7474/](http://localhost:7474/) on Firefox
-- Login as `neo4j:neo4j` and set new password
-- Close Firefox
-- Go to BloodHound and login `neo4j:new_passwd`
-- Enable `Settings > Dark Mode`
-- Close BloodHound
-
-## Change username
-I made this simple ![script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
-- Press `Ctrl + Alt + F1`
-- Login as kali
-- Change root password
-- Log off and relogin as root
-- Run this:
+- Change password and port
 ```shell
-# Check it copied correctly and set your new username
-bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/b911bb2f77a490819980903361ebc2c37c204298/change_username.sh) kali new_username
+sudo ./bloodhound-cli config set default_admin.password '<password>'
+echo "BLOODHOUND_PORT=8888" | sudo tee .env
 ```
-- Change user password
+- Build
+```shell
+sudo ./bloodhound-cli install
+```
+- Usage
+I configured a function to start and stop the service just by running: `bloodhound start | stop | status`
+```shell
+function bloodhound {
+    if [ "$1" = "start" ]; then
+        sudo /opt/bloodhound/bloodhound-cli containers up
+    elif [ "$1" = "stop" ]; then
+        sudo /opt/bloodhound/bloodhound-cli containers down
+    elif [ "$1" = "status" ]; then
+        sudo /opt/bloodhound/bloodhound-cli running
+    else
+        echo '[!] Error. Usage: bloodhound start | stop | status'
+    fi
+}
+```

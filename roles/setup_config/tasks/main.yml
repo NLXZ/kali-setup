@@ -23,13 +23,10 @@
     mode: '755'
   become: true
 
-- name: "Install fonts"
-  ansible.builtin.get_url:
-    url: https://webdraft.hu/fonts/classic-console/fonts/clacon2.ttf
-    dest: /usr/share/fonts/truetype/clacon2.ttf
-    owner: root
-    group: root
-    mode: '755'
+- name: "Set up NeoVim"
+  ansible.builtin.shell: |
+    /usr/bin/nvim -c ':PackerSync' +qa
+  changed_when: false
   become: true
 
 - name: "Set up LightDM"

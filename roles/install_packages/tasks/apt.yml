@@ -10,10 +10,41 @@
 
 - name: "Install packages"
   ansible.builtin.apt:
-    pkg: "{{ item }}"
-  loop: "{{ install_packages_apt }}"
-  loop_control:
-    label: " {{ item }}"
+    pkg: 
+      - bat
+      - beep
+      - bloodhound
+      - chisel
+      - dmenu
+      - docker.io
+      - feh
+      - flameshot
+      - fuse
+      - fzf
+      - gdb
+      - gdb-peda
+      - ghidra
+      - gobuster
+      - golang
+      - i3blocks
+      - fonts-jetbrains-mono
+      - jq
+      - kitty
+      - lftp
+      - lsd
+      - ltrace
+      - lxappearance
+      - moreutils
+      - npm
+      - ntpdate
+      - obsidian
+      - rdate
+      - remmina
+      - rofi
+      - seclists
+      - sshpass
+      - strace
+      - xsel
   become: true
 
 - name: "Clean up"

@@ -24,18 +24,34 @@ function precmd() {
     fi
 }
 
+# Suggest-Paste Fix
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
+
+
 # Alias
 alias sudo='sudo '
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+alias ffuf='ffuf -c'
+alias wfuzz='wfuzz -c'
 alias ls='lsd'
 alias cat='batcat'
 alias vim='nvim'
-alias cdw='cd $WORKDIR'
-alias mkw='kitty --session workspace --detach'
+alias cdw='mkdir -p ~/Workdir && cd $WORKDIR'
 alias target='echo "$@" > /home/$NUSER/.target'
 alias stty-size='echo "stty rows $(tput lines) columns $(tput cols)"'
 alias sliver='nohup sliver-server daemon &>/dev/null & disown; sliver-client'
+
 
 # Functions
 function list-ports () {
@@ -43,7 +59,30 @@ function list-ports () {
 }
 
 function docker-clean () {
-    sudo systemctl stop docker.*
-    sudo rm -rf /var/lib/docker/*
-    echo "[!] Docker cleaned up."
+    sudo docker rm -f $(sudo docker container ls -qa)
+    sudo docker rmi -f $(sudo docker images -qa)
+    echo "[+] Docker cleaned up."
+}
+
+function mkw {
+    mkdir -p $WORKDIR/{VPN,Recon,Findings,Exploits}
+    tmux new-session -d -s $1
+    tmux rename-window -t $1:1 "VPN"
+    tmux send-keys -t $1:1 "cd $WORKDIR/VPN && clear" C-m
+    tmux new-window -t $1:2 -n "Recon"
+    tmux send-keys -t $1:2 "cd $WORKDIR/Recon && clear" C-m
+    tmux select-window -t $1:1
+    tmux attach -t $1
+}
+
+function bloodhound {
+    if [ "$1" = "start" ]; then
+        sudo /opt/bloodhound/bloodhound-cli containers up
+    elif [ "$1" = "stop" ]; then
+        sudo /opt/bloodhound/bloodhound-cli containers down
+    elif [ "$1" = "status" ]; then
+        sudo /opt/bloodhound/bloodhound-cli running
+    else
+        echo '[!] Error. Usage: bloodhound start | stop | status'
+    fi
 }

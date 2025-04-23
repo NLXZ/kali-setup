@@ -13,3 +13,9 @@
   loop: "{{ install_packages_git }}"
   loop_control:
     label: " {{ item.keys() | first }}"
+
+- name: "Set up packages"
+  ansible.builtin.unarchive:
+    src: /usr/bin/bloodhound-cli-linux-amd64.tar.gz
+    dest: /usr/bin/
+    remote_src: yes
