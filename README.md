@@ -27,13 +27,7 @@ bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2
 ## Automatic configuration script
 - Install ansible
 ```bash
-sudo -v
-```
-```bash
-sudo apt update
-sudo apt install pipx -y
-pipx ensurepath
-pipx install ansible-core
+pipx ensurepath && pipx install ansible-core
 ```
 
 - Clone the repository and run the playbook
