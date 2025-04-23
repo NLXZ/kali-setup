@@ -1,7 +1,4 @@
 ---
-- name: "Import package list"
-  ansible.builtin.include_vars: apt.yml
-
 - name: "Update"
   ansible.builtin.apt:
     update_cache: true
