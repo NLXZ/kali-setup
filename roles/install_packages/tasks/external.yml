@@ -1,0 +1,13 @@
+---
+- name: "Set up external packages"
+  ansible.builtin.copy:
+    src: files/external_packages.sh
+    dest: /tmp/external_packages.sh
+    owner: root
+    group: root
+    mode: '755'
+  become: true
+
+- name: "Install external packages"
+  ansible.builtin.script: /tmp/external_packages.sh
+  become: true

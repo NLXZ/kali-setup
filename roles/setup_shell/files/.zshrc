@@ -6,7 +6,7 @@ export EDITOR=nvim
 export WORDCHARS=${WORDCHARS//*}
 export NUSER=$(getent passwd 1000 | cut -d: -f1)
 export WORKDIR="/home/$NUSER/Workdir"
-export PATH=$PATH:/home/$NUSER/.go/bin
+export PATH=$PATH:/home/$NUSER/.local/bin:/home/$NUSER/.go/bin
 
 # Plugins
 plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions sudo)
@@ -65,12 +65,13 @@ function docker-clean () {
 }
 
 function mkw {
-    mkdir -p $WORKDIR/{VPN,Recon,Findings,Exploits}
+    if [ -z "$1" ]; then echo "[!] Need a name of session."; return 1; fi
+    mkdir -p $WORKDIR/{enum,tools,findings,shared}
     tmux new-session -d -s $1
     tmux rename-window -t $1:1 "VPN"
-    tmux send-keys -t $1:1 "cd $WORKDIR/VPN && clear" C-m
-    tmux new-window -t $1:2 -n "Recon"
-    tmux send-keys -t $1:2 "cd $WORKDIR/Recon && clear" C-m
+    tmux send-keys -t $1:1 "cd $WORKDIR/ && clear" C-m
+    tmux new-window -t $1:2 -n "Term"
+    tmux send-keys -t $1:2 "cd $WORKDIR/enum && clear" C-m
     tmux select-window -t $1:1
     tmux attach -t $1
 }

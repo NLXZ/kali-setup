@@ -31,19 +31,25 @@
       - krb5-config
       - krb5-user
       - lftp
+      - libxml2-dev
+      - libxslt-dev
       - lsd
       - ltrace
       - lxappearance
+      - mono-complete
       - moreutils
       - netexec
+      - nishang
       - npm
       - ntpdate
       - obsidian
       - rdate
       - remmina
+      - rlwrap
       - rofi
       - seclists
       - sshpass
+      - sshuttle
       - strace
       - xsel
   become: true

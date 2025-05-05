@@ -48,3 +48,9 @@
   loop_control:
     label: " Set up {{ item.0.home }}/{{ item.1 | regex_replace('^' + role_path + '/files/', '') }} for {{ item.0.user }}"
   become: true
+
+- name: "Set up sudo PATH"
+  ansible.builtin.shell: |
+    sed -i "s/secure_path=\".*\"/secure_path=\"\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin:\/home\/$user\/.local\/bin:\/home\/$user\/.go\/bin\"/" /etc/sudoers
+  changed_when: false
+  become: true

@@ -4,3 +4,6 @@
 
 - name: "Git"
   ansible.builtin.include_tasks: git.yml
+
+- name: "External"
+  ansible.builtin.include_tasks: external.yml
