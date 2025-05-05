@@ -137,6 +137,11 @@ setup_firefox_bookmarks:
     Placement: "toolbar"
     Folder: "Windows"
 
+  - Title: "SharpCollection"
+    URL: "https://github.com/Flangvik/SharpCollection/"
+    Placement: "toolbar"
+    Folder: "Windows"
+
   - Title: "AppLocker ByPass"
     URL: "https://github.com/api0cradle/UltimateAppLockerByPassList/"
     Placement: "toolbar"
