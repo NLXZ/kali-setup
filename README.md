@@ -1,5 +1,5 @@
 # Kali Setup
-I created this ansible playbook to automate the process of setting up my Kali Linux [dotfiles](https://github.com/NLXZ/dotfiles) and configurations.
+I created this ansible playbook to automate the process of setting up my Kali Linux [dotfiles](https://github.com/NLXZ/dotfiles) and configurations.  
 Works on new clean [kali vmware machine](https://www.kali.org/get-kali/#kali-virtual-machines)
 
 # Index
