@@ -13,17 +13,18 @@ Tested on a clean [Kali](https://www.kali.org/get-kali/#kali-virtual-machines) V
 
 # Setup
 ## Change username
-I made this simple [script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username
-- Press `Ctrl + Alt + F1`
-- Login as kali
-- Change root password
-- Log off and relogin as root
-- Run this:
+I made this simple [script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username:
 ```shell
+# Press (Ctrl + Alt + F1)
+# Login as kali:kali
+# Change root password
+sudo passwd root
+exit
+# Log off and relogin as root
 # Check it copied correctly and set your new username
 bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/0865987d1524c5bb5c7cc02eb60385544808fb5e/change-username.sh) kali new_username
+# Change your user password
 ```
-- Change user password
 
 ## Automatic configuration script
 - Install ansible
