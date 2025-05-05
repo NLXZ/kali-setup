@@ -79,6 +79,8 @@ function mkw {
 function bloodhound {
     if [ "$1" = "start" ]; then
         sudo /opt/bloodhound/bloodhound-cli containers up
+        port=$(grep -oP 'BLOODHOUND_PORT=\K\d+' /opt/bloodhound/.env)
+        echo "[*] Running on: http://127.0.0.1:$port"
     elif [ "$1" = "stop" ]; then
         sudo /opt/bloodhound/bloodhound-cli containers down
     elif [ "$1" = "status" ]; then
