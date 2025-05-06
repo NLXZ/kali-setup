@@ -51,6 +51,6 @@
 
 - name: "Set up sudo PATH"
   ansible.builtin.shell: |
-    sed -i "s/secure_path=\".*\"/secure_path=\"\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin:\/home\/$user\/.local\/bin:\/home\/$user\/.go\/bin\"/" /etc/sudoers
+    sed -i "s/secure_path=\".*\"/secure_path=\"\/usr\/local\/sbin:\/usr\/local\/bin:\/usr\/sbin:\/usr\/bin:\/sbin:\/bin:\/home\/{{ ansible_env.USER }}\/.local\/bin:\/home\/{{ ansible_env.USER }}\/.go\/bin\"/" /etc/sudoers
   changed_when: false
   become: true
