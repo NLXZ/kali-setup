@@ -10,6 +10,7 @@ Tested on a clean [Kali](https://www.kali.org/get-kali/#kali-virtual-machines) V
   - [Import FoxyProxy configuration](#import-foxyproxy-configuration)
   - [Install BurpSuite extensions](#install-burpSuite-extensions)
   - [Setup Neo4j and BloodHound](#setup-neo4j-and-bloodHound)
+  - [Enable Evil-WinRM remote path completion](#enable-evil-winrm-remote-path-completion)
 
 # Setup
 ## Change username
@@ -24,6 +25,7 @@ exit
 # Check it copied correctly and set your new username
 bash <(curl -sL https://gist.githubusercontent.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb/raw/0865987d1524c5bb5c7cc02eb60385544808fb5e/change-username.sh) kali new_username
 # Change your user password
+sudo passwd new_username
 ```
 
 ## Automatic configuration script
@@ -79,18 +81,8 @@ sudo ./bloodhound-cli install
 - Usage  
 >I configured a function on my .zshrc to start and stop the service just by running:  
 `bloodhound start | stop | status`
+
+## Enable Evil-WinRM remote path completion
 ```shell
-function bloodhound {
-    if [ "$1" = "start" ]; then
-        sudo /opt/bloodhound/bloodhound-cli containers up
-        port=$(grep -oP 'BLOODHOUND_PORT=\K\d+' /opt/bloodhound/.env)
-        echo "[*] Running on: http://127.0.0.1:$port"
-    elif [ "$1" = "stop" ]; then
-        sudo /opt/bloodhound/bloodhound-cli containers down
-    elif [ "$1" = "status" ]; then
-        sudo /opt/bloodhound/bloodhound-cli running
-    else
-        echo '[!] Error. Usage: bloodhound start | stop | status'
-    fi
-}
+curl -sL https://gist.github.com/NLXZ/b3a8588bc65b05d52bba3f67cd20f310/raw/73f64e78ae28f92276dcf62794a11999f43bdd91/evil-winrm_remote_path_completion.sh | sh
 ```
