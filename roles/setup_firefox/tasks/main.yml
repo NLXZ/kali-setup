@@ -9,18 +9,11 @@
     - "{{ ansible_env.HOME }}/.mozilla"
   become: true
 
-- name: Remove Firefox
-  become: true
-  ansible.builtin.apt:
-    name: firefox-esr
-    state: absent
-
 - name: Reinstall Firefox
+  ansible.builtin.shell: |
+    apt-get reinstall firefox-esr
+  changed_when: false
   become: true
-  ansible.builtin.apt:
-    name: firefox-esr
-    state: present
-    update_cache: true
 
 - name: "Set up Firefox policies.json"
   ansible.builtin.template:
