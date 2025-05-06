@@ -20,7 +20,7 @@
   ansible.builtin.apt:
     name: firefox-esr
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: "Set up Firefox policies.json"
   ansible.builtin.template:
