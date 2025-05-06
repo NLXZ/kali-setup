@@ -25,9 +25,9 @@
 
 - name: "Set up NeoVim"
   ansible.builtin.shell: |
-    user="{{ ansible_env.USER }}"
+    user=$(getent passwd 1000 | cut -d: -f1)
     sudo -u $user /usr/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-    sudo $user /usr/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    sudo /usr/bin/nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   async: 30
   poll: 0
   changed_when: false
