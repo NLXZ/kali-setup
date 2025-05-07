@@ -9,8 +9,6 @@ Tested on a clean [Kali](https://www.kali.org/get-kali/#kali-virtual-machines) V
 - [Manual configurations](#manual-configurations)
   - [Import FoxyProxy configuration](#import-foxyproxy-configuration)
   - [Install BurpSuite extensions](#install-burpSuite-extensions)
-  - [Setup Neo4j and BloodHound](#setup-neo4j-and-bloodHound)
-  - [Enable Evil-WinRM remote path completion](#enable-evil-winrm-remote-path-completion)
 
 # Setup
 ## Change username
@@ -59,30 +57,3 @@ http://127.0.0.1:1080?type=socks5&color=0088ff&title=Socks
 - Go to `Extensions > BApp Store`
 - Doble click on `Installed`
 - For each ticked extension click on `Reinstall`
-
-## Setup BloodHound
-- Download BloodHound
-```shell
-sudo mkdir -p /opt/bloodhound
-wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz
-sudo tar -xvzf bloodhound-cli-linux-amd64.tar.gz -C /opt/bloodhound
-rm -f bloodhound-cli-linux-amd64.tar.gz
-cd /opt/bloodhound
-```
-- Change password and port
-```shell
-sudo ./bloodhound-cli config set default_admin.password 'password'
-echo "BLOODHOUND_PORT=8888" | sudo tee .env
-```
-- Build
-```shell
-sudo ./bloodhound-cli install
-```
-- Usage  
->I configured a function on my .zshrc to start and stop the service just by running:  
-`bloodhound start | stop | status`
-
-## Enable Evil-WinRM remote path completion
-```shell
-curl -sL https://gist.github.com/NLXZ/b3a8588bc65b05d52bba3f67cd20f310/raw/73f64e78ae28f92276dcf62794a11999f43bdd91/evil-winrm_remote_path_completion.sh | sh
-```

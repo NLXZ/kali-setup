@@ -37,21 +37,21 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
-
 # Alias
-alias sudo='sudo '
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias ffuf='ffuf -c'
 alias wfuzz='wfuzz -c'
+alias sudo='sudo '
 alias ls='lsd'
 alias cat='batcat'
 alias vim='nvim'
 alias cdw='mkdir -p ~/Workdir && cd $WORKDIR'
 alias target='echo "$@" > /home/$NUSER/.target'
-alias stty-size='echo "stty rows $(tput lines) columns $(tput cols)"'
+alias stty-size='echo -e "stty rows $(tput lines) columns $(tput cols)\nexport TERM=xterm\nexport SHELL=/bin/bash"'
 alias sliver='nohup sliver-server daemon &>/dev/null & disown; sliver-client'
-
+alias http='python3 -m http.server'
+alias smb='impacket-smbserver -smb2support'
 
 # Functions
 function list-ports () {

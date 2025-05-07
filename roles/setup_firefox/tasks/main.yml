@@ -9,10 +9,16 @@
     - "{{ ansible_env.HOME }}/.mozilla"
   become: true
 
+- name: "Import reinstall_firefox.sh"
+  ansible.builtin.copy:
+    src: files/reinstall_firefox.sh
+    dest: /tmp/reinstall_firefox.sh
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: '755'
+
 - name: Reinstall Firefox
-  ansible.builtin.shell: |
-    apt-get reinstall firefox-esr
-  changed_when: false
+  ansible.builtin.script: /tmp/reinstall_firefox.sh
   become: true
 
 - name: "Set up Firefox policies.json"

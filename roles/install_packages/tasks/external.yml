@@ -1,5 +1,20 @@
 ---
-- name: "Set up external packages"
+- name: "Import git package list"
+  ansible.builtin.include_vars: git.yml
+
+- name: "Install git packages"
+  ansible.builtin.get_url:
+    url: "{{ item.values() | first }}"
+    dest: "/usr/bin/{{ item.keys() | first }}"
+    owner: "root"
+    group: "root"
+    mode: '755'
+  become: true
+  loop: "{{ install_packages_git }}"
+  loop_control:
+    label: " {{ item.keys() | first }}"
+
+- name: "Import external packages"
   ansible.builtin.copy:
     src: files/external_packages.sh
     dest: /tmp/external_packages.sh
@@ -9,3 +24,21 @@
 
 - name: "Install external packages"
   ansible.builtin.script: /tmp/external_packages.sh
+
+- name: "Enable Evil-WinRM remote path completion"
+  ansible.builtin.shell: |
+    set -o pipefail
+    curl -sL https://gist.github.com/NLXZ/b3a8588bc65b05d52bba3f67cd20f310/raw/73f64e78ae28f92276dcf62794a11999f43bdd91/evil-winrm_remote_path_completion.sh | sh
+  become: true
+
+- name: "Install BloodHound"
+  ansible.builtin.shell: |
+    mkdir -p /opt/bloodhound
+    wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz
+    tar -xvzf bloodhound-cli-linux-amd64.tar.gz -C /opt/bloodhound
+    rm -f bloodhound-cli-linux-amd64.tar.gz
+    cd /opt/bloodhound
+    ./bloodhound-cli config set default_admin.password 'admin'
+    echo "BLOODHOUND_PORT=8888" > .env
+    ./bloodhound-cli install
+  become: true
