@@ -28,7 +28,9 @@
 - name: "Enable Evil-WinRM remote path completion"
   ansible.builtin.shell: |
     set -o pipefail
-    curl -sL https://gist.github.com/NLXZ/b3a8588bc65b05d52bba3f67cd20f310/raw/73f64e78ae28f92276dcf62794a11999f43bdd91/evil-winrm_remote_path_completion.sh | sh
+    u="https://gist.github.com/NLXZ/b3a8588bc65b05d52bba3f67cd20f310/raw/73f64e78ae28f92276dcf62794a11999f43bdd91/evil-winrm_remote_path_completion.sh"
+    curl -sL $u | sh
+  changed_when: false
   become: true
 
 - name: "Install BloodHound"
@@ -41,4 +43,5 @@
     ./bloodhound-cli config set default_admin.password 'admin'
     echo "BLOODHOUND_PORT=8888" > .env
     ./bloodhound-cli install
+  changed_when: false
   become: true
