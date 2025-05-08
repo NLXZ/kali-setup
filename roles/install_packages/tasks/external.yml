@@ -45,4 +45,5 @@
     echo "BLOODHOUND_PORT=8888" > .env
     yes y | ./bloodhound-cli install
   changed_when: false
+  failed_when: false
   become: true

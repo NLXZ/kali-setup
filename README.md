@@ -8,7 +8,7 @@ Tested on a clean [Kali](https://www.kali.org/get-kali/#kali-virtual-machines) V
   - [Automatic configuration script](#automatic-configuration-script)
 - [Manual configurations](#manual-configurations)
   - [Import FoxyProxy configuration](#import-foxyproxy-configuration)
-  - [Install BurpSuite extensions](#install-burpSuite-extensions)
+  - [Install BurpSuite extensions](#install-burpsuite-extensions)
 
 # Setup
 ## Change username
