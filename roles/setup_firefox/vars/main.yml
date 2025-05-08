@@ -30,47 +30,47 @@ setup_firefox_bookmarks:
   - Title: "Temp Mail IO"
     URL: "https://temp-mail.io/"
     Placement: "toolbar"
-    Folder: "Temp Mails"
+    Folder: "Temp/Temp Mails"
 
   - Title: "Temp Mail ORG"
     URL: "https://temp-mail.org/"
     Placement: "toolbar"
-    Folder: "Temp Mails"
+    Folder: "Temp/Temp Mails"
 
   - Title: "SMS Online"
     URL: "https://sms-online.co/receive-free-sms"
     Placement: "toolbar"
-    Folder: "Temp SMS"
+    Folder: "Temp/Temp SMS"
 
   - Title: "Recieve SMSs"
     URL: "https://receive-smss.com/"
     Placement: "toolbar"
-    Folder: "Temp SMS"
+    Folder: "Temp/Temp SMS"
 
   - Title: "Recieve SMS free"
     URL: "https://receive-sms-free.cc/"
     Placement: "toolbar"
-    Folder: "Temp SMS"
+    Folder: "Temp/Temp SMS"
 
   - Title: "Anonym SMS"
     URL: "https://anonymsms.com/"
     Placement: "toolbar"
-    Folder: "Temp SMS"
+    Folder: "Temp/Temp SMS"
 
   - Title: "Temp SMS"
     URL: "https://temp-sms.org/"
     Placement: "toolbar"
-    Folder: "Temp SMS"
+    Folder: "Temp/Temp SMS"
 
   - Title: "Quackr"
     URL: "https://quackr.io/temporary-numbers"
     Placement: "toolbar"
-    Folder: "Temp SMS"
+    Folder: "Temp/Temp SMS"
 
   - Title: "WebHook Site"
     URL: "https://webhook.site/"
     Placement: "toolbar"
-    Folder: "Web Hooks"
+    Folder: "Temp/Web Hooks"
 
   - Title: "Internal All The Things"
     URL: "https://swisskyrepo.github.io/InternalAllTheThings/"
@@ -91,26 +91,6 @@ setup_firefox_bookmarks:
     URL: "https://wadcoms.github.io/"
     Placement: "toolbar"
     Folder: "Active Directory"
-
-  - Title: "RevShells"
-    URL: "https://www.revshells.com/"
-    Placement: "toolbar"
-    Folder: "Reverse Shell"
-
-  - Title: "Pentest Monkey"
-    URL: "https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet"
-    Placement: "toolbar"
-    Folder: "Reverse Shell"
-
-  - Title: "Internal All The Things"
-    URL: "https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/"
-    Placement: "toolbar"
-    Folder: "Reverse Shell"
-
-  - Title: "PwnBook"
-    URL: "https://nlxz.gitbook.io/pwnbook/post-exloitation/reverse-shells"
-    Placement: "toolbar"
-    Folder: "Reverse Shell"
 
   - Title: "Privilege Escalation - HackTricks"
     URL: "https://book.hacktricks.wiki/en/windows-hardening/checklist-windows-privilege-escalation.html"
@@ -166,6 +146,26 @@ setup_firefox_bookmarks:
     URL: "https://github.com/andrew-d/static-binaries"
     Placement: "toolbar"
     Folder: "Linux"
+
+  - Title: "RevShells"
+    URL: "https://www.revshells.com/"
+    Placement: "toolbar"
+    Folder: "Shells"
+
+  - Title: "Pentest Monkey"
+    URL: "https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet"
+    Placement: "toolbar"
+    Folder: "Shells"
+
+  - Title: "Internal All The Things"
+    URL: "https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/"
+    Placement: "toolbar"
+    Folder: "Shells"
+
+  - Title: "PwnBook"
+    URL: "https://nlxz.gitbook.io/pwnbook/post-exloitation/reverse-shells"
+    Placement: "toolbar"
+    Folder: "Shells"
 
   - Title: "CyberChef"
     URL: "https://gchq.github.io/CyberChef/"
