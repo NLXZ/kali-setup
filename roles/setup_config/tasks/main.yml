@@ -14,15 +14,6 @@
     group: "{{ ansible_env.USER }}"
     mode: '755'
 
-- name: "Set up background"
-  ansible.builtin.copy:
-    src: files/background.jpg
-    dest: /usr/share/backgrounds/background.jpg
-    owner: root
-    group: root
-    mode: '755'
-  become: true
-
 - name: "Set up NeoVim"
   ansible.builtin.shell: |
     set -o pipefail
@@ -42,6 +33,14 @@
     group: root
     mode: '644'
   become: true
+
+- name: "Set up LightDM wallpaper"
+  ansible.builtin.copy:
+    src: ~/.config/wallpaper
+    dest: /usr/share/wallpapers/wallpaper
+    owner: "root"
+    group: "root"
+    mode: '644'
 
 - name: "Enable LightDM service"
   ansible.builtin.systemd:
