@@ -45,38 +45,22 @@ alias wfuzz='wfuzz -c'
 alias sudo='sudo '
 alias ls='lsd'
 alias cat='batcat'
-alias vim='nvim'
-alias cdw='mkdir -p ~/Workdir && cd $WORKDIR'
+alias vi='nvim'
+alias py='python3'
+alias cdw='cd $WORKDIR'
 alias target='echo "$@" > /home/$NUSER/.target'
 alias stty-size='echo -e "stty rows $(tput lines) columns $(tput cols)\nexport TERM=xterm\nexport SHELL=/bin/bash"'
-alias sliver='nohup sliver-server daemon &>/dev/null & disown; sliver-client'
 alias http='python3 -m http.server'
-alias smb='impacket-smbserver -smb2support'
+alias smb='impacket-smbserver -smb2support -username $USER -password $USER'
+alias vpn='sudo openvpn'
+alias c='xsel -bi'
 
 # Functions
-function list-ports () {
-    grep -hoP "^\d{1,5}(?=/.*open)" $@ | paste -sd,
+docker-clean () {
+    docker system prune --all --volumes
 }
 
-function docker-clean () {
-    sudo docker rm -f $(sudo docker container ls -qa)
-    sudo docker rmi -f $(sudo docker images -qa)
-    echo "[+] Docker cleaned up."
-}
-
-function mkw {
-    if [ -z "$1" ]; then echo "[!] Need a name of session."; return 1; fi
-    mkdir -p $WORKDIR/{enum,tools,findings,shared}
-    tmux new-session -d -s $1
-    tmux rename-window -t $1:1 "VPN"
-    tmux send-keys -t $1:1 "cd $WORKDIR/ && clear" C-m
-    tmux new-window -t $1:2 -n "Term"
-    tmux send-keys -t $1:2 "cd $WORKDIR/enum && clear" C-m
-    tmux select-window -t $1:1
-    tmux attach -t $1
-}
-
-function bloodhound {
+bloodhound () {
     if [ "$1" = "start" ]; then
         sudo /opt/bloodhound/bloodhound-cli containers up
         port=$(grep -oP 'BLOODHOUND_PORT=\K\d+' /opt/bloodhound/.env)
@@ -88,4 +72,12 @@ function bloodhound {
     else
         echo '[!] Error. Usage: bloodhound start | stop | status'
     fi
+}
+
+s () {
+    if [ $# -ne 2 ]; then
+        echo "[!] Usage: s <user>@<host> <password>"
+        return 1
+    fi
+    sshpass -p "$2" ssh -o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null "$1"
 }

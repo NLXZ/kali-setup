@@ -15,6 +15,7 @@
       - chisel
       - dmenu
       - docker.io
+      - donut
       - feh
       - flameshot
       - fonts-jetbrains-mono
@@ -27,6 +28,7 @@
       - golang
       - i3blocks
       - jq
+      - keepassxc
       - kitty
       - krb5-config
       - krb5-user
@@ -36,6 +38,7 @@
       - lsd
       - ltrace
       - lxappearance
+      - mingw-w64
       - mono-complete
       - moreutils
       - netexec
