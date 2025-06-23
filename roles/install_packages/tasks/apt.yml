@@ -2,7 +2,7 @@
 - name: "Update"
   ansible.builtin.apt:
     update_cache: true
-    # upgrade: "yes"
+    upgrade: "yes"  # full upgrade (you may want to comment this line)
   become: true
 
 - name: "Install packages"
@@ -41,10 +41,9 @@
       - mingw-w64
       - mono-complete
       - moreutils
-      - netexec
       - nishang
       - npm
-      - ntpdate
+      - ntpsec-ntpdate
       - obsidian
       - rdate
       - remmina
