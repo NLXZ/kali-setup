@@ -41,6 +41,7 @@
     owner: "root"
     group: "root"
     mode: '644'
+  become: true
 
 - name: "Enable LightDM service"
   ansible.builtin.systemd:
