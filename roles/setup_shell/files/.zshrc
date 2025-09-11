@@ -65,24 +65,25 @@ http() {
 smb() {
     local sharename="shared"
     local path="."
-    local user="$USER"
-    local password="$USER"
     local additional_args=()
-    
+    local auth_args=()
+
     while [ $# -gt 0 ]; do
         case "$1" in
-            -u|--user)
+            -u)
                 user="$2"
+                auth_args+=("-username" "$user")
                 shift 2
                 ;;
-            -p|--password)
+            -p)
                 password="$2"
+                auth_args+=("-password" "$password")
                 shift 2
                 ;;
             *)
-                if [ -z "$sharename" ] || [ "$sharename" = "SHARE" ]; then
+                if [ "$sharename" = "shared" ]; then
                     sharename="$1"
-                elif [ -z "$path" ] || [ "$path" = "." ]; then
+                elif [ "$path" = "." ]; then
                     path="$1"
                 else
                     additional_args+=("$1")
@@ -91,8 +92,8 @@ smb() {
                 ;;
         esac
     done
-    
-    /usr/bin/python3 /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support "$sharename" "$path" -username "$user" -password "$password" "${additional_args[@]}"
+
+    /usr/bin/python3 /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support "$sharename" "$path" "${auth_args[@]}" "${additional_args[@]}"
 }
 
 docker-clean() {
