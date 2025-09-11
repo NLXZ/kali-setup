@@ -44,11 +44,10 @@ ansible-playbook -K main.yml
 ## Import FoxyProxy configuration
 - Open Firefox
 - Open FoxyProxy
-- Go to `Import > Import Proxy List`
+- Go to `Import > Import from URL`
 - Copy this:
 ```
-http://127.0.0.1:8080?type=http&color=ff8800&title=BurpSuite
-http://127.0.0.1:1080?type=socks5&color=0088ff&title=Socks
+https://gist.github.com/NLXZ/2372fc1ede2c6c56c5143b888befc64a/raw/829c4502f84d99f54d3627e977ba634e2cdebf21/FoxyProxy.json
 ```
 - Import and save
 
