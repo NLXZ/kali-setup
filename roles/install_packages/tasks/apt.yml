@@ -33,6 +33,7 @@
       - krb5-config
       - krb5-user
       - lftp
+      - libpcap-dev
       - libxml2-dev
       - libxslt-dev
       - lsd
@@ -53,6 +54,7 @@
       - sshpass
       - sshuttle
       - strace
+      - username-anarchy
       - xsel
   become: true
 

@@ -6,9 +6,10 @@ export EDITOR=nvim
 export WORDCHARS=${WORDCHARS//*}
 export NUSER=$(getent passwd 1000 | cut -d: -f1)
 export WORKDIR="/home/$NUSER/Workdir"
-export PATH=$PATH:/home/$NUSER/.local/bin:/home/$NUSER/go/bin
+export PATH=/home/$NUSER/.local/bin:$PATH
 
 # Plugins
+DISABLE_MAGIC_FUNCTIONS=true
 plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions sudo)
 source $ZSH/oh-my-zsh.sh
 source /usr/share/doc/fzf/examples/key-bindings.zsh
@@ -38,6 +39,8 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(bracketed-paste)
 
 # Alias
+unalias gau
+unalias gf
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias ffuf='ffuf -c'
@@ -93,7 +96,7 @@ smb() {
         esac
     done
 
-    /usr/bin/python3 /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support "$sharename" "$path" "${auth_args[@]}" "${additional_args[@]}"
+    smbserver.py -smb2support "$sharename" "$path" "${auth_args[@]}" "${additional_args[@]}"
 }
 
 docker-clean() {
