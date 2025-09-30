@@ -54,7 +54,6 @@
       - sshpass
       - sshuttle
       - strace
-      - username-anarchy
       - xsel
   become: true
 
