@@ -14,7 +14,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 wget https://raw.githubusercontent.com/NLXZ/pwnc/refs/heads/main/pwnc.sh -O ~/.local/bin/pwnc
 
 # Go packages
-go env -w GOBIN=/home/$NUSER/.local/bin
+go env -w GOBIN=/home/$USER/.local/bin
 
 go install github.com/0xpugal/dedupe@latest
 go install github.com/tomnomnom/unfurl@latest
