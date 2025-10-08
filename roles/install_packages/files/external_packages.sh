@@ -27,8 +27,8 @@ go install github.com/PentestPad/subzy@latest
 go install github.com/hahwul/dalfox/v2@latest
 go install github.com/Hackmanit/Web-Cache-Vulnerability-Scanner@latest && mv ~/.local/bin/Web-Cache-Vulnerability-Scanner ~/.local/bin/wcvs
 go install github.com/devploit/nomore403@latest
-go install github.com/glebarez/cero@latest
 go install github.com/nlxz/nscope@main
+go install github.com/nlxz/hacks/kxss@latest
 go install github.com/dwisiswant0/crlfuzz/cmd/crlfuzz@latest
 go install github.com/projectdiscovery/pdtm/cmd/pdtm@latest && pdtm -bp ~/.local/bin -ia
 
@@ -44,3 +44,17 @@ ln -s ~/git/Corsy/corsy.py ~/.local/bin/corsy.py
 
 git clone https://github.com/defparam/smuggler ~/git/smuggler
 ln -s ~/git/smuggler/smuggler.py ~/.local/bin/smuggler.py
+
+git clone https://github.com/coffinxp/loxs ~/git/loxs
+chmod +x ~/git/Corsy/corsy.py
+uv add -r ~/git/loxs/requirements.txt --script ~/git/loxs/loxs.py
+sed -i '1s|.*|#!/usr/bin/env -S uv run --script|' ~/git/loxs/loxs.py
+ln -s ~/git/loxs/loxs.py ~/.local/bin/loxs.py
+axel https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/loxs/chrome.deb
+sudo dpkg -i /tmp/loxs/chrome.deb
+axel https://storage.googleapis.com/chrome-for-testing-public/128.0.6613.119/linux64/chromedriver-linux64.zip -o /tmp/loxs/chromedriver.zip
+unzip /tmp/loxs/chromedriver.zip -d /tmp/loxs/
+sudo mv /tmp/loxs/chromedriver /usr/bin
+rm -rf /tmp/loxs/
+
+curl -s https://codeload.github.com/tomnomnom/hacks/tar.gz/master | tar -xz --strip=2 hacks-master/kxss

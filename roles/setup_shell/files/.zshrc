@@ -132,3 +132,18 @@ s() {
                               -o UserKnownHostsFile=/dev/null \
                               "${args[@]}"
 }
+
+git_folder() {
+    local URL="${1%/}"
+    local FOLDER="$2"
+    local OUT_DIR="${3:-$FOLDER}"
+
+    mkdir -p "$OUT_DIR"
+    local REPO_NAME
+    REPO_NAME=$(basename "$URL")
+
+    local TAR_URL
+    TAR_URL=$(echo "$URL" | sed -E 's|https://github.com/|https://codeload.github.com/|')"/tar.gz/master"
+
+    curl -s "$TAR_URL" | tar -xz -C "$OUT_DIR" --strip=2 "${REPO_NAME}-master/$FOLDER"
+}
