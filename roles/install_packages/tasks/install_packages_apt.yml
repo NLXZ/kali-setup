@@ -5,12 +5,12 @@
 - name: "Update"
   ansible.builtin.apt:
     update_cache: true
-    upgrade: "yes"  # full upgrade
+    # upgrade: "yes"  # full upgrade
   become: true
 
 - name: "Install packages"
   ansible.builtin.apt:
-    pkg: "{{ packages_apt }}"
+    pkg: "{{ install_packages_apt }}"
   become: true
 
 - name: "Clean up"

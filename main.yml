@@ -1,5 +1,5 @@
 ---
-- name: "Build Kali Environment"
+- name: "Set up Kali Environment"
   hosts: localhost
   roles:
     - install_packages
