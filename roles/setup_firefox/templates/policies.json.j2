@@ -2,11 +2,6 @@
     "policies": {
       "AppAutoUpdate": false,
       "BackgroundAppUpdate": false,
-      "Bookmarks": [
-{% for item in setup_firefox_bookmarks %}
-          {{ item | to_json }}{{ "," if not loop.last }}
-{% endfor %}
-      ],
       "BlockAboutAddons": false,
       "BlockAboutConfig": false,
       "BlockAboutProfiles": false,

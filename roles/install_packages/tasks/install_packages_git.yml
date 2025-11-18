@@ -1,0 +1,15 @@
+---
+- name: "Import git package list"
+  ansible.builtin.include_vars: vars.yml
+
+- name: "Install git packages"
+  ansible.builtin.get_url:
+    url: "{{ item.values() | first }}"
+    dest: "/usr/bin/{{ item.keys() | first }}"
+    owner: "root"
+    group: "root"
+    mode: '755'
+  become: true
+  loop: "{{ install_packages_git }}"
+  loop_control:
+    label: " {{ item.keys() | first }}"

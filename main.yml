@@ -3,8 +3,7 @@
   hosts: localhost
   roles:
     - install_packages
-    - setup_shell
-    - setup_config
+    - dotfiles
     - setup_burpsuite
     - setup_firefox
 
