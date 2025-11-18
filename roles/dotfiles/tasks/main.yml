@@ -82,9 +82,6 @@
   become: true
 
 - name: "Modify openvpn capabilities"
-  become: true
-  ansible.posix.capabilities:
-    path: "/usr/sbin/openvpn"
-    capability: cap_net_admin+ep
-    state: present
+  ansible.builtin.shell: sudo setcap CAP_NET_ADMIN+ep/usr/sbin/openvpn
+  changed_when: false
   become: true
