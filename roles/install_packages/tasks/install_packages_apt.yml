@@ -5,7 +5,7 @@
 - name: "Update"
   ansible.builtin.apt:
     update_cache: true
-    # upgrade: "yes"  # full upgrade
+    upgrade: "yes"  # full upgrade
   become: true
 
 - name: "Install packages"

@@ -73,3 +73,18 @@
     timedatectl set-timezone Europe/Madrid
   changed_when: false
   become: true
+
+- name: "Add user to docker group"
+  ansible.builtin.user:
+    name: "{{ ansible_env.HOME }}"
+    groups: docker
+    append: true
+  become: true
+
+- name: "Modify openvpn capabilities"
+  become: true
+  ansible.posix.capabilities:
+    path: "/usr/sbin/openvpn"
+    capability: cap_net_admin+ep
+    state: present
+  become: true

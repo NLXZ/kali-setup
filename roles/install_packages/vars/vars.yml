@@ -15,7 +15,7 @@ install_packages_apt:
   - dmenu
   - docker.io
   - donut
-  - exa
+  - eza
   - feh
   - flameshot
   - fonts-jetbrains-mono
