@@ -9,3 +9,5 @@
 
 - name: "Install external packages"
   ansible.builtin.script: /tmp/external_packages.sh
+  args:
+    executable: /bin/bash
