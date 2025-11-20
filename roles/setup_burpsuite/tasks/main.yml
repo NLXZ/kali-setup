@@ -20,18 +20,10 @@
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
     mode: '644'
-  register: result
+  register: setup_burpsuite_result
   retries: 5
   delay: 3
-  until: result.status_code == 200
-
-- name: "Set up BurpSuite configuration"
-  ansible.builtin.copy:
-    src: "files/UserConfigCommunity.json"
-    dest: "{{ ansible_env.HOME }}/.BurpSuite/UserConfigCommunity.json"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
-    mode: '644'
+  until: setup_burpsuite_result.status_code == 200
 
 - name: "Copy certificate to /usr/local/share/ca-certificates/"
   ansible.builtin.copy:

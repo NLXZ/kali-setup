@@ -22,8 +22,8 @@
 - name: "Set up dotfiles"
   ansible.builtin.shell: |
     set -o pipefail
-    sudo -- su {{ ansible_env.USER }} -c 'stow -t $HOME -d $HOME/.dotfiles --adopt .'
-    sudo -- su root -c 'stow -t $HOME -d $HOME/.dotfiles --adopt .'
+    sudo -- su {{ ansible_env.USER }} -c 'stow -t $HOME -d $HOME/.dotfiles --adopt . --ignore "^_.*"'
+    sudo -- su root -c 'stow -t $HOME -d $HOME/.dotfiles --adopt . --ignore "^_.*"'
   changed_when: false
   become: true
 
@@ -47,12 +47,13 @@
   become: true
 
 - name: "Set up LightDM wallpaper"
-  ansible.builtin.copy:
-    src: ~/.wallpaper
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/.dotfiles/.config/.wallpaper"
     dest: /usr/share/wallpapers/wallpaper
     owner: "root"
     group: "root"
     mode: '644'
+    state: link
   become: true
 
 - name: "Enable LightDM service"
@@ -76,12 +77,12 @@
 
 - name: "Add user to docker group"
   ansible.builtin.user:
-    name: "{{ ansible_env.HOME }}"
+    name: "{{ ansible_env.USER }}"
     groups: docker
     append: true
   become: true
 
 - name: "Modify openvpn capabilities"
-  ansible.builtin.shell: sudo setcap CAP_NET_ADMIN+ep/usr/sbin/openvpn
+  ansible.builtin.shell: sudo setcap CAP_NET_ADMIN+ep /usr/sbin/openvpn
   changed_when: false
   become: true

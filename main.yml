@@ -8,14 +8,8 @@
     - setup_firefox
 
   tasks:
-    - name: "Finished"
-      ansible.builtin.pause:
-        prompt: "Kali setup complete. Would you like to reboot the system now? (y/N)"
-      register: yn
-
     - name: "Reboot"
       ansible.builtin.shell: "nohup -- bash -c 'sleep 3; reboot' &"
       async: 0
       poll: 0
-      when: yn.user_input == 'y'
       changed_when: false
