@@ -10,7 +10,7 @@ packages=(
     "certipy"
     "uro"
     "clairvoyance"
-    "'evil-winrm-py[kerberos]'"
+    "evil-winrm-py[kerberos]"
     "uv"
     "git+https://github.com/login-securite/DonPAPI.git"
     "git+https://github.com/Pennyw0rth/NetExec"
