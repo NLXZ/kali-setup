@@ -5,8 +5,8 @@
     - install_packages
     - setup_dotfiles
     - setup_settings
-    - setup_burpsuite
     - setup_chrome
+    - setup_burpsuite
 
   tasks:
     - name: "Clean up"
