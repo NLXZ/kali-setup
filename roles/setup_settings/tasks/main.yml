@@ -46,4 +46,6 @@
 
 - name: "Modify openvpn capabilities"
   ansible.builtin.command: setcap CAP_NET_ADMIN+ep /usr/sbin/openvpn
+  register: setup_settings_capabilities
+  changed_when: setup_settings_capabilities.rc != 0
   become: true
