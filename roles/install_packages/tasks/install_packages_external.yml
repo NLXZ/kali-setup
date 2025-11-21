@@ -3,8 +3,8 @@
   ansible.builtin.copy:
     src: files/external_packages.sh
     dest: /tmp/external_packages.sh
-    owner: "{{ env.USER }}"
-    group: "{{ env.USER }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: '755'
 
 - name: "Install external packages"
