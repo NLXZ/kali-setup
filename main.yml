@@ -3,7 +3,8 @@
   hosts: localhost
   roles:
     - install_packages
-    - dotfiles
+    - setup_dotfiles
+    - setup_settings
     - setup_burpsuite
     - setup_chrome
 
