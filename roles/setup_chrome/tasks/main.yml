@@ -7,8 +7,9 @@
 - name: "Create Chrome files"
   ansible.builtin.file:
     path: "{{ item }}"
-    state: absent
+    state: directory
   loop:
+    - "/usr/share/chrome"
     - "/etc/opt/chrome/policies/recommended"
     - "/etc/opt/chrome/policies/managed"
   become: true
@@ -42,9 +43,18 @@
 
 - name: "Set up Chrome bookmarks"
   ansible.builtin.copy:
-    src: "{{ ansible_env.HOME }}/.dotfiles/_misc/bookmarks.html"
-    dest: /etc/opt/chrome/policies/managed/bookmarks.html
+    src: files/bookmarks.html
+    dest: /usr/share/chrome/bookmarks.html
     owner: root
     group: root
+    mode: '644'
+  become: true
+
+- name: "Copy FoxyProxy configuration"
+  ansible.builtin.copy:
+    src: files/FoxyProxy.json
+    dest: /usr/share/chrome/FoxyProxy.json
+    owner: "root"
+    group: "root"
     mode: '644'
   become: true

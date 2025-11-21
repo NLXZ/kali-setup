@@ -3,7 +3,6 @@ I created this ansible playbook to automate the process of setting up my Kali Li
 Tested on a clean [Kali](https://www.kali.org/get-kali/#kali-virtual-machines) VMware virtual machine.
 
 ## 1. Setup
-I made this simple [script](https://gist.github.com/NLXZ/2a90f5cb7b066f3571ca52f2cea643fb) to change the username:
 > Start the VM and press `Ctrl + Alt + F1`
 - Login as `kali:kali` and change root password:
 ```shell
@@ -20,7 +19,7 @@ NEW_USER='user' NEW_PASS='pass' sh setup.sh
 ## 2. Import FoxyProxy configuration
 - Open Chrome
 - Open FoxyProxy Options `Import`
-- Import `Home` > `.dotfiles` > `_misc` > `FoxyProxy.json`
+- Import `/usr/share/chrome/FoxyProxy.json`
 - Save
 
 ## 3. Install BurpSuite extensions
