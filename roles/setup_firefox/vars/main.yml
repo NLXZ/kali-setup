@@ -1,6 +1,0 @@
----
-setup_firefox_plugins:
-  - "foxyproxy-standard"
-  - "wappalyzer"
-  - "darkreader"
-  - "ublock-origin"

@@ -1,0 +1,50 @@
+---
+- name: "Install Chrome"
+  ansible.builtin.apt:
+    deb: "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+  become: true
+
+- name: "Create Chrome files"
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/etc/opt/chrome/policies/recommended"
+    - "/etc/opt/chrome/policies/managed"
+  become: true
+
+- name: "Set up Chrome preferences"
+  ansible.builtin.copy:
+    src: files/initial_preferences
+    dest: /opt/google/chrome/initial_preferences
+    owner: root
+    group: root
+    mode: '644'
+  become: true
+
+- name: "Set up Chrome policies"
+  ansible.builtin.copy:
+    src: files/policies.json
+    dest: /etc/opt/chrome/policies/recommended/policies.json
+    owner: root
+    group: root
+    mode: '644'
+  become: true
+
+- name: "Set up Chrome extensions"
+  ansible.builtin.copy:
+    src: files/extensions.json
+    dest: /etc/opt/chrome/policies/managed/extensions.json
+    owner: root
+    group: root
+    mode: '644'
+  become: true
+
+- name: "Set up Chrome bookmarks"
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.dotfiles/_misc/bookmarks.html"
+    dest: /etc/opt/chrome/policies/managed/bookmarks.html
+    owner: root
+    group: root
+    mode: '644'
+  become: true

@@ -34,6 +34,7 @@ install_packages_apt:
   - krb5-config
   - krb5-user
   - lftp
+  - libnss3-tools
   - libpcap-dev
   - libxml2-dev
   - libxslt-dev

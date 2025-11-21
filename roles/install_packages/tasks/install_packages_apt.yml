@@ -11,9 +11,3 @@
   ansible.builtin.apt:
     pkg: "{{ install_packages_apt }}"
   become: true
-
-- name: "Clean up"
-  ansible.builtin.apt:
-    autoremove: true
-    autoclean: true
-  become: true

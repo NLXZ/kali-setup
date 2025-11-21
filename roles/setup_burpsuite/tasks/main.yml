@@ -33,3 +33,7 @@
     group: root
     mode: '644'
   become: true
+
+- name: "Install certificate"
+  ansible.builtin.shell: certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "CA Certificates" -i /usr/local/share/ca-certificates/*
+  changed_when: false

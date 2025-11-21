@@ -1,0 +1,19 @@
+{
+  "bookmark_bar": {
+    "show_on_all_tabs": true,
+    "show_tab_groups": false
+  },
+  "distribution": {
+    "import_bookmarks_from_file": "/opt/google/chrome/bookmarks.html",
+    "import_bookmarks": false,
+    "make_chrome_default": true,
+    "system_level": true,
+    "verbose_logging": false
+  },
+  "credentials_enable_autosignin": false,
+  "credentials_enable_automatic_passkey_upgrades": false,
+  "auto_pin_new_tab_groups": false,
+  "usage_stats_reporting": false,
+  "num_personal_suggestions": 1,
+  "shortcust_visible": false
+}

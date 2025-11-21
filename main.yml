@@ -5,9 +5,15 @@
     - install_packages
     - dotfiles
     - setup_burpsuite
-    - setup_firefox
+    - setup_chrome
 
   tasks:
+    - name: "Clean up"
+      ansible.builtin.apt:
+        autoremove: true
+        autoclean: true
+      become: true
+
     - name: "Reboot"
       ansible.builtin.shell: "nohup -- bash -c 'sleep 3; reboot' &"
       async: 0

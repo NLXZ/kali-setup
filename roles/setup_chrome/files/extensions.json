@@ -1,0 +1,22 @@
+{
+  "ExtensionSettings": {
+    "*": {
+      "installation_mode": "allowed"
+    },
+    "gppongmhjkpfnbhagpmjfkannfbllamg": {
+      "update_url": "https://clients2.google.com/service/update2/crx",
+      "installation_mode": "normal_installed",
+      "toolbar_pin": "default_pinned"
+    },
+    "gcknhkkoolaabfmlnjonogaaifnjlfnp": {
+      "update_url": "https://clients2.google.com/service/update2/crx",
+      "installation_mode": "normal_installed",
+      "toolbar_pin": "default_pinned"
+    },
+    "hlkenndednhfkekhgcdicdfddnkalmdm": {
+      "update_url": "https://clients2.google.com/service/update2/crx",
+      "installation_mode": "normal_installed",
+      "toolbar_pin": "default_pinned"
+    }
+  }
+}
