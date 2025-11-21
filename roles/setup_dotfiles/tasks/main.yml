@@ -2,7 +2,7 @@
 - name: "Clone dotfiles"
   ansible.builtin.git:
     repo: "https://github.com/NLXZ/dotfiles.git"
-    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    dest: "{{ env.HOME }}/.dotfiles"
     clone: "yes"
     version: main
 
@@ -14,7 +14,7 @@
 
 - name: "Link dotfiles for root"
   ansible.builtin.file:
-    src: "{{ ansible_env.HOME }}/.dotfiles"
+    src: "{{ env.HOME }}/.dotfiles"
     dest: /root/.dotfiles
     state: link
   become: true
@@ -22,7 +22,7 @@
 - name: "Set up dotfiles"
   ansible.builtin.shell: |
     set -o pipefail
-    sudo -- su {{ ansible_env.USER }} -c 'stow -t $HOME -d $HOME/.dotfiles --adopt .'
+    sudo -- su {{ env.USER }} -c 'stow -t $HOME -d $HOME/.dotfiles --adopt .'
     sudo -- su root -c 'stow -t $HOME -d $HOME/.dotfiles --adopt .'
   changed_when: false
   become: true
@@ -30,7 +30,7 @@
 - name: "Set up NeoVim"
   ansible.builtin.shell: |
     set -o pipefail
-    sudo -- su {{ ansible_env.USER }} -c 'nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"'
+    sudo -- su {{ env.USER }} -c 'nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"'
     sudo -- su root -c 'nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"'
   async: 30
   poll: 0
