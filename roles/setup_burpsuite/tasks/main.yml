@@ -17,8 +17,8 @@
   ansible.builtin.get_url:
     url: "http://127.0.0.1:8080/cert"
     dest: "/tmp/cacert.der"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: "{{ ansible_facts['user'] }}"
+    group: "{{ ansible_facts['user'] }}"
     mode: '644'
   register: setup_burpsuite_result
   retries: 5
@@ -35,6 +35,6 @@
   become: true
 
 - name: "Install certificate"
-  ansible.builtin.command: certutil -d sql:/home/{{ ansible_user }}/.pki/nssdb -A -t "C,," -n "BurpSuite_CA" -i /usr/local/share/ca-certificates/burpsuite_ca.der
+  ansible.builtin.command: certutil -d sql:/home/{{ ansible_facts['user'] }}/.pki/nssdb -A -t "C,," -n "BurpSuite_CA" -i /usr/local/share/ca-certificates/burpsuite_ca.der
   register: setup_burpsuite_intall_certificate
   changed_when: setup_burpsuite_intall_certificate.rc != 0

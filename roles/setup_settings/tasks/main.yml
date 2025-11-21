@@ -10,7 +10,7 @@
 
 - name: "Set up LightDM wallpaper"
   ansible.builtin.file:
-    src: "/home/{{ ansible_user }}/.dotfiles/.wallpaper"
+    src: "/home/{{ ansible_facts['user'] }}/.dotfiles/.wallpaper"
     dest: /usr/share/wallpapers/wallpaper
     owner: "root"
     group: "root"
@@ -39,7 +39,7 @@
 
 - name: "Add user to docker group"
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ ansible_facts['user'] }}"
     groups: docker
     append: true
   become: true
