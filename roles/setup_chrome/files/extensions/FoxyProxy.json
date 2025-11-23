@@ -1,16 +1,5 @@
 {
-  "mode": "127.0.0.1:1080",
-  "sync": false,
-  "autoBackup": false,
-  "passthrough": "",
-  "theme": "default",
-  "container": {},
-  "commands": {
-    "setProxy": "",
-    "setTabProxy": "",
-    "includeHost": "",
-    "excludeHost": ""
-  },
+  "mode": "disable",
   "data": [
     {
       "active": true,

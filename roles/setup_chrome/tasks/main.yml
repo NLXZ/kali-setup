@@ -1,10 +1,10 @@
 ---
-- name: "Install Chrome"
+- name: "Install Google Chrome"
   ansible.builtin.apt:
     deb: "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
   become: true
 
-- name: "Create Chrome files"
+- name: "Create Google Chrome config files"
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
@@ -13,9 +13,10 @@
     - "/usr/share/chrome"
     - "/etc/opt/chrome/policies/recommended"
     - "/etc/opt/chrome/policies/managed"
+    - "/tmp/extensions"
   become: true
 
-- name: "Set up Chrome preferences"
+- name: "Set up Google Chrome preferences"
   ansible.builtin.copy:
     src: files/initial_preferences
     dest: /opt/google/chrome/initial_preferences
@@ -24,7 +25,7 @@
     mode: '644'
   become: true
 
-- name: "Set up Chrome policies"
+- name: "Set up Google Chrome policies"
   ansible.builtin.copy:
     src: files/policies.json
     dest: /etc/opt/chrome/policies/recommended/policies.json
@@ -33,7 +34,7 @@
     mode: '644'
   become: true
 
-- name: "Set up Chrome extensions"
+- name: "Set up Google Chrome extensions"
   ansible.builtin.copy:
     src: files/extensions.json
     dest: /etc/opt/chrome/policies/managed/extensions.json
@@ -42,7 +43,7 @@
     mode: '644'
   become: true
 
-- name: "Set up Chrome bookmarks"
+- name: "Set up Google Chrome bookmarks"
   ansible.builtin.copy:
     src: files/bookmarks.html
     dest: /usr/share/chrome/bookmarks.html
@@ -51,11 +52,37 @@
     mode: '644'
   become: true
 
-- name: "Copy FoxyProxy configuration"
+- name: "Set up Google Chrome profile"
+  ansible.builtin.shell: |
+    set -o pipefail
+    Xvfb :99 -screen 0 1920x1080x24 &
+    export DISPLAY=:99
+    google-chrome --no-sandbox --disable-gpu &
+  async: 0
+  poll: 0
+  changed_when: false
+
+- name: "Install Google Chrome extensions"
+  ansible.builtin.shell: |
+    set -o pipefail
+    jq -r 'keys[]' extensions.json | while IFS= read -r extension; do
+      while [ ! -d "$extension" ]; do
+        sleep 1
+        done
+    done
+    pkill chrome || true
+  changed_when: false
+
+- name: "Copy extensions configuration script"
   ansible.builtin.copy:
-    src: files/FoxyProxy.json
-    dest: /usr/share/chrome/FoxyProxy.json
-    owner: "root"
-    group: "root"
-    mode: '644'
-  become: true
+    src: files/extensions
+    dest: /tmp/extensions
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: '755'
+
+- name: "Run extensions configuration script"
+  ansible.builtin.script: config.js extensions.json
+  args:
+    executable: /usr/bin/node
+    chdir: /tmp/extensions/

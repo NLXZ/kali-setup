@@ -16,7 +16,7 @@
       become: true
 
     - name: "Reboot"
-      ansible.builtin.shell: "nohup -- bash -c 'sleep 3; reboot' &"
+      ansible.builtin.shell: "sleep 5; nohup -- reboot &"
       async: 0
       poll: 0
       changed_when: false

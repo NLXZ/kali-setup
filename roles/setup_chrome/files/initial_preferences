@@ -4,7 +4,7 @@
     "show_tab_groups": false
   },
   "distribution": {
-    "import_bookmarks_from_file": "/opt/google/chrome/bookmarks.html",
+    "import_bookmarks_from_file": "/usr/share/chrome/bookmarks.html",
     "import_bookmarks": false,
     "make_chrome_default": true,
     "system_level": true,

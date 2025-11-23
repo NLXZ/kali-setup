@@ -1,0 +1,8 @@
+{
+  "theme": "dark",
+  "upgradeMessage": false,
+  "dynamicIcon": false,
+  "badge": true,
+  "showCached": false,
+  "tracking": false
+}
