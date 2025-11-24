@@ -61,7 +61,7 @@
   poll: 0
   changed_when: false
 
-- name: "Copy Google Chrome extensions config"
+- name: "Set up Google Chrome extensions installation"
   ansible.builtin.copy:
     src: files/extensions
     dest: /tmp
@@ -69,30 +69,7 @@
     group: "{{ lookup('env','USER') }}"
     mode: '755'
 
-- name: "Set up Google Chrome extensions config"
-  ansible.builtin.shell: |
-    cd /tmp/extensions
-    npm install level
-    find "$HOME/.config/google-chrome/Default/Extensions/" -name "options.html" \
-      -exec sh -c '
-        p=${1#*/Extensions/}; id=${p%%/*}; rel=${p#*/}; rel=${rel#*/};
-        google-chrome "chrome-extension://$id/$rel"
-      ' sh {} \;
-  changed_when: false
-
 - name: "Install Google Chrome extensions"
-  ansible.builtin.shell: |
-    set -o pipefail
-    jq -r 'keys[]' /tmp/extensions/extensions.json | while IFS= read -r extension; do
-      while [ ! -d "$HOME/.config/google-chrome/Default/Local Extension Settings/$extension" ]; do
-        sleep 1
-      done
-    done
-    pkill chrome || true
-  changed_when: false
-
-- name: "Configure Google Chrome extensions"
-  ansible.builtin.script: /tmp/extensions/config.js extensions.json
+  ansible.builtin.script: /tmp/extensions/setup.sh
   args:
-    chdir: /tmp/extensions/
-    executable: /usr/bin/node
+    executable: /bin/bash
