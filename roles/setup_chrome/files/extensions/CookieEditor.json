@@ -1,10 +1,20 @@
 {
-"adsEnabled":false,
-"advancedCookies":true,
-"animationsEnabled":false,
-"buttonBarTop":false,
-"devtoolsEnabled":true,
-"exportFormat":"ask",
-"extraInfo":"nothing",
-"theme":"auto"
+  "all_options": {
+    "adsEnabled":false,
+    "advancedCookies":true,
+    "animationsEnabled":false,
+    "buttonBarTop":false,
+    "devtoolsEnabled":true,
+    "exportFormat":"ask",
+    "extraInfo":"nothing",
+    "theme":"auto"
+  },
+  "adDismiss.cookie-editor": {
+    "date": 1,
+    "version": 1
+  },
+  "adDismissLast": {
+    "date": 1,
+    "version": 1
+  }
 }
