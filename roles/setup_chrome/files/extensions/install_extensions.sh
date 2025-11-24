@@ -14,7 +14,7 @@ done
 # Ensure all extension config directories
 for extension in $(echo $extensions); do
     url=$(find "$HOME/.config/google-chrome/Default/Extensions/$extension" -name 'options.html' | grep -oP "$extension/.*?/\K.*")
-    DISPLAY=:99 google-chrome --new-window "chrome-extension://$extension/$url"
+    google-chrome "chrome-extension://$extension/$url"
     while [ ! -d "$HOME/.config/google-chrome/Default/Local Extension Settings/$extension" ]; do
         sleep 1
     done
