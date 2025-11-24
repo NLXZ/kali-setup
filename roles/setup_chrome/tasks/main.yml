@@ -13,7 +13,6 @@
     - "/usr/share/chrome"
     - "/etc/opt/chrome/policies/recommended"
     - "/etc/opt/chrome/policies/managed"
-    - "/tmp/extensions"
   become: true
 
 - name: "Set up Google Chrome preferences"
@@ -56,33 +55,44 @@
   ansible.builtin.shell: |
     set -o pipefail
     Xvfb :99 -screen 0 1920x1080x24 &
-    export DISPLAY=:99
-    google-chrome --no-sandbox --disable-gpu &
+    timeout 1 sh -c 'DISPLAY=:99 google-chrome --no-sandbox --disable-gpu'
+    DISPLAY=:99 google-chrome --no-sandbox --disable-gpu & sleep 5
   async: 0
   poll: 0
+  changed_when: false
+
+- name: "Copy Google Chrome extensions config"
+  ansible.builtin.copy:
+    src: files/extensions
+    dest: /tmp
+    owner: "{{ lookup('env','USER') }}"
+    group: "{{ lookup('env','USER') }}"
+    mode: '755'
+
+- name: "Set up Google Chrome extensions config"
+  ansible.builtin.shell: |
+    cd /tmp/extensions
+    npm install level
+    find "$HOME/.config/google-chrome/Default/Extensions/" -name "options.html" \
+      -exec sh -c '
+        p=${1#*/Extensions/}; id=${p%%/*}; rel=${p#*/}; rel=${rel#*/};
+        google-chrome "chrome-extension://$id/$rel"
+      ' sh {} \;
   changed_when: false
 
 - name: "Install Google Chrome extensions"
   ansible.builtin.shell: |
     set -o pipefail
-    jq -r 'keys[]' extensions.json | while IFS= read -r extension; do
-      while [ ! -d "$extension" ]; do
+    jq -r 'keys[]' /tmp/extensions/extensions.json | while IFS= read -r extension; do
+      while [ ! -d "$HOME/.config/google-chrome/Default/Local Extension Settings/$extension" ]; do
         sleep 1
-        done
+      done
     done
     pkill chrome || true
   changed_when: false
 
-- name: "Copy extensions configuration script"
-  ansible.builtin.copy:
-    src: files/extensions
-    dest: /tmp/extensions
-    owner: "{{ lookup('env','USER') }}"
-    group: "{{ lookup('env','USER') }}"
-    mode: '755'
-
-- name: "Run extensions configuration script"
-  ansible.builtin.script: config.js extensions.json
+- name: "Configure Google Chrome extensions"
+  ansible.builtin.script: /tmp/extensions/config.js extensions.json
   args:
-    executable: /usr/bin/node
     chdir: /tmp/extensions/
+    executable: /usr/bin/node
