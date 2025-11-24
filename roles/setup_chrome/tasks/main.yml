@@ -69,6 +69,6 @@
     mode: '755'
 
 - name: "Install Google Chrome extensions"
-  ansible.builtin.script: /tmp/extensions/setup.sh
+  ansible.builtin.script: /tmp/extensions/install_extensions.sh
   args:
     executable: /bin/bash
