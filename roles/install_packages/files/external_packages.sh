@@ -60,19 +60,17 @@ mkdir -p ~/.docker/cli-plugins
 cp /usr/bin/docker-compose ~/.docker/cli-plugins/
 
 # bloodhound
-wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz
-tar -xvzf bloodhound-cli-linux-amd64.tar.gz -C ~/.local/bin/
-rm -f bloodhound-cli-linux-amd64.tar.gz
+curl -sL https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz | tar -xz -C ~/.local/bin/
 
-# git
-mkdir -p ~/tools/
+# git tools
+mkdir -p ~/git-tools/
 
-git clone https://github.com/urbanadventurer/username-anarchy ~/tools/username-anarchy
-ln -s ~/tools/username-anarchy/username-anarchy ~/.local/bin/username-anarchy
+git clone https://github.com/urbanadventurer/username-anarchy ~/git-tools/username-anarchy
+ln -s ~/git-tools/username-anarchy/username-anarchy ~/.local/bin/username-anarchy
 
-git clone https://github.com/s0md3v/Corsy ~/tools/Corsy
-chmod +x ~/tools/Corsy/corsy.py
-ln -s ~/tools/Corsy/corsy.py ~/.local/bin/corsy.py
+git clone https://github.com/s0md3v/Corsy ~/git-tools/Corsy
+chmod +x ~/git-tools/Corsy/corsy.py
+ln -s ~/git-tools/Corsy/corsy.py ~/.local/bin/corsy.py
 
-git clone https://github.com/defparam/smuggler ~/tools/smuggler
-ln -s ~/tools/smuggler/smuggler.py ~/.local/bin/smuggler.py
+git clone https://github.com/defparam/smuggler ~/git-tools/smuggler
+ln -s ~/git-tools/smuggler/smuggler.py ~/.local/bin/smuggler.py
