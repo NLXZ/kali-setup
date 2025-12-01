@@ -18,7 +18,7 @@
   ansible.builtin.command: |
     id -nu 1000
   register: user_current
-  when: "user_name.user_input != ''"
+  when: "user_name.user_input | length > 0"
   changed_when: false
   tags:
     - user
@@ -30,7 +30,7 @@
     usermod -l {{ user_name.user_input }} {{ user_current.stdout }}
     usermod -d /home/{{ user_name.user_input }} -m {{ user_name.user_input }}
     groupmod -n {{ user_name.user_input }} {{ user_current.stdout }}
-  when: "user_name.user_input != ''"
+  when: "user_name.user_input | length > 0"
   changed_when: "user_name.user_input != user_current.stdout"
   tags:
     - user
@@ -39,7 +39,7 @@
   ansible.builtin.shell: |
     set -o pipefail
     echo "{{ user_name.user_input | default(user_current.stdout, true) }}:{{ user_pass.user_input }}" | chpasswd
-  when: "user_pass.user_input != ''"
-  changed_when: "user_pass.user_input != ''"
+  when: "user_pass.user_input | length > 0"
+  changed_when: "user_pass.user_input | length > 0"
   tags:
     - user
