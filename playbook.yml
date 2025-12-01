@@ -1,5 +1,5 @@
 ---
-- name: "Set up Kali Environment"
+- name: "Kali Environment"
   hosts: localhost
   become: true
 
@@ -12,12 +12,12 @@
     - burpsuite
 
   tasks:
-    - name: "Finished"
+    - name: "Prompt for reboot"
       ansible.builtin.pause:
         prompt: "Would you like to reboot the system now? (y/N)"
       register: reboot
 
-    - name: "Reboot"
+    - name: "Reboot system"
       ansible.builtin.shell: "nohup -- sh -c 'sleep 3; reboot' &"
       async: 0
       poll: 0

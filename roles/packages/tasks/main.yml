@@ -1,26 +1,26 @@
 ---
-- name: "[apt]"
+- name: "Install APT packages"
   ansible.builtin.include_tasks: packages_apt.yml
   tags:
     - apt
     - kali
     - packages
 
-- name: "[git]"
+- name: "Install Git packages"
   ansible.builtin.include_tasks: packages_git.yml
   tags:
     - git
     - kali
     - packages
 
-- name: "[go]"
+- name: "Install Go packages"
   ansible.builtin.include_tasks: packages_go.yml
   tags:
     - go
     - kali
     - packages
 
-- name: "[pipx]"
+- name: "Install Pipx packages"
   ansible.builtin.include_tasks: packages_pipx.yml
   tags:
     - pipx

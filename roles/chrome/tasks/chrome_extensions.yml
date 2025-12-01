@@ -1,5 +1,5 @@
 ---
-- name: "[chrome] Set up extensions settings"
+- name: "Deploy extension settings"
   ansible.builtin.template:
     src: "extensions.json.j2"
     dest: "/etc/opt/chrome/policies/managed/extensions.json"
@@ -9,7 +9,7 @@
   tags:
     - chrome
 
-- name: "[chrome] Start chrome"
+- name: "Start chrome (headless)"
   ansible.builtin.shell: |
     set -o pipefail
     Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
@@ -17,51 +17,48 @@
   async: 0
   poll: 0
   changed_when: false
-  tags:
-    - chrome
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+  tags:
+    - chrome
 
-- name: "[chrome] Wait for extension to be installed"
+- name: "Wait for extensions to be installed"
   ansible.builtin.shell: |
     set -o pipefail
 
-    id="{{ item.id }}"
-    dir="$HOME/.config/google-chrome/Default/Extensions/$id"
-    opt_dir="$HOME/.config/google-chrome/Default/Local Extension Settings/$id"
+    profile="$HOME/.config/google-chrome/Default"
+    ext_id="{{ item.id }}"
+    ext_dir="$profile/Extensions/$ext_id"
+    ext_cfg="$profile/Local Extension Settings/$ext_id"
 
-    if [ -d "$dir" ] && [ -d "$opt_dir" ]; then
-      exit
-    fi
+    [[ -d "$ext_dir" && -d "$ext_cfg" ]] && exit 0
 
-    while [ ! -d "$dir" ]; do
-      sleep 1
-    done
-    url=$(find "$dir" -name 'options.html' | cut -d/ -f10-)
+    timeout 120 bash -c "while [[ ! -d '$ext_dir' ]]; do sleep 1; done" || exit 1
+
+    url=$(find "$ext_dir" -name 'options.html' | cut -d/ -f10-)
     google-chrome "chrome-extension://$id/$url"
 
-    while [ ! -d "$opt_dir" ]; do
-      sleep 1
-    done
+    timeout 120 bash -c "while [[ ! -d '$ext_cfg' ]]; do sleep 1; done" || exit 1
+
     echo "Installed: $id"
-  register: chrome_result_wait
-  changed_when: "'Installed' in chrome_result_wait.stdout"
+  register: chrome_wait
+  changed_when: "'Installed' in chrome_wait.stdout"
   loop: "{{ chrome_extensions }}"
   loop_control:
     label: "{{ item.name }}"
-  tags:
-    - chrome
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+  tags:
+    - chrome
 
-- name: "[chrome] Stop chrome"
+- name: "Stop chrome"
   ansible.builtin.command: "killall -w chrome Xvfb"
-  register: chrome_result_stop
-  changed_when: "chrome_result_stop.rc == 0"
-  tags:
-    - chrome
+  register: chrome_stop
+  changed_when: "chrome_stop.rc == 0"
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+  tags:
+    - chrome
 
 - name: "Copy extensions configuration"
   ansible.builtin.copy:
@@ -73,7 +70,7 @@
   tags:
     - chrome
 
-- name: "[chrome] Set up extensions configuration"
+- name: "Configure extensions"
   ansible.builtin.shell: |
     set -o pipefail
     cd /tmp/extensions
@@ -83,7 +80,7 @@
   loop: "{{ chrome_extensions }}"
   loop_control:
     label: "{{ item.name }}"
-  tags:
-    - chrome
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+  tags:
+    - chrome

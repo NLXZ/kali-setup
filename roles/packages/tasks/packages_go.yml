@@ -1,5 +1,5 @@
 ---
-- name: "[go][kali] Install packages"
+- name: "Install packages"
   ansible.builtin.command: |
     go install {{ item }}
   environment:

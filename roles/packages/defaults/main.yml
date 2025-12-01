@@ -25,6 +25,7 @@ packages_apt:
     - bloodyad
     - chisel
     - docker-compose
+    - docker.io
     - donut
     - fuse
     - gdb

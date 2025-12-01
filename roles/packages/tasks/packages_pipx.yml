@@ -1,5 +1,5 @@
 ---
-- name: "[pipx][kali] Install packages"
+- name: "Install packages"
   ansible.builtin.command: |
     pipx install --global {{ item }}
   changed_when: false

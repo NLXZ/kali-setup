@@ -1,5 +1,5 @@
 ---
-- name: "[user] Request username"
+- name: "Prompt for new username"
   ansible.builtin.pause:
     prompt: "Enter the new username (leave blank to skip)"
   register: "user_name"
@@ -7,7 +7,7 @@
   tags:
     - user
 
-- name: "[user] Request password"
+- name: "Prompt for new password"
   ansible.builtin.pause:
     prompt: "Enter the new password (leave blank to skip)"
     echo: false
@@ -16,7 +16,7 @@
   tags:
     - user
 
-- name: "[user] Get current username"
+- name: "Get current username"
   ansible.builtin.command: |
     id -nu 1000
   register: user_current
@@ -25,7 +25,7 @@
   tags:
     - user
 
-- name: "[user] Change username"
+- name: "Change username"
   ansible.builtin.shell: |
     set -o pipefail
     killall -w -u {{ user_current.stdout }} || true
@@ -37,7 +37,7 @@
   tags:
     - user
 
-- name: "[user] Change password"
+- name: "Change password"
   ansible.builtin.shell: |
     set -o pipefail
     echo "{{ user_name.user_input | default(user_current.stdout, true) }}:{{ user_pass.user_input }}" | chpasswd

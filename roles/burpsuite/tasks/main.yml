@@ -1,43 +1,41 @@
 ---
-- name: "[burpsuite] Start BurpSuite in headless mode"
+- name: "Start Burp Suite (headless)"
   ansible.builtin.shell: |
     set -o pipefail
-    bash -c 'yes y | bash <(cat $(which burpsuite) | sed "s/-jar/-Djava.awt.headless=true -jar/")' &
+    yes y | java -jar -Djava.awt.headless=true /usr/share/burpsuite/burpsuite.jar &
   async: 60
   poll: 0
   changed_when: false
-  tags:
-    - burpsuite
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
-
-- name: "[burpsuite] Wait for BurpSuite to start"
-  ansible.builtin.wait_for:
-    port: 8080
-    host: 127.0.0.1
-    state: started
   tags:
     - burpsuite
 
-- name: "[burpsuite] Download BurpSuite certificate"
+- name: "Wait for listener"
+  ansible.builtin.wait_for:
+    host: 127.0.0.1
+    port: 8080
+  tags:
+    - burpsuite
+
+- name: "Download CA certificate"
   ansible.builtin.get_url:
     url: "http://127.0.0.1:8080/cert"
-    dest: "/usr/local/share/ca-certificates/burpsuite_ca.der"
+    dest: "/usr/local/share/ca-certificates/ca-burpsuite.der"
+    force: true
     owner: root
     group: root
     mode: '644'
-  register: burpsuite_result
-  retries: 5
-  delay: 3
-  until: burpsuite_result.status_code == 200
+  register: burpsuite_download_ca
+  until: burpsuite_download_ca.status_code == 200
   tags:
     - burpsuite
 
-- name: "[burpsuite] Install certificate"
-  ansible.builtin.command: certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "BurpSuite_CA" -i /usr/local/share/ca-certificates/burpsuite_ca.der
-  register: burpsuite_intall_certificate
-  changed_when: burpsuite_intall_certificate.rc != 0
-  tags:
-    - burpsuite
+- name: "Import CA certificate"
+  ansible.builtin.command: certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "burpsuite_ca" -i /usr/local/share/ca-certificates/burpsuite_ca.der
+  register: burpsuite_import_ca
+  changed_when: burpsuite_import_ca.rc == 0
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+  tags:
+    - burpsuite

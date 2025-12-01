@@ -1,18 +1,15 @@
 ---
-- name: "[chrome] Install"
+- name: "Installation"
   ansible.builtin.include_tasks: chrome_install.yml
   tags:
     - chrome
-    - kali
 
-- name: "[chrome] Config"
+- name: "Configuration"
   ansible.builtin.include_tasks: chrome_config.yml
   tags:
     - chrome
-    - kali
 
-- name: "[chrome] Extensions"
+- name: "Extensions"
   ansible.builtin.include_tasks: chrome_extensions.yml
   tags:
     - chrome
-    - kali

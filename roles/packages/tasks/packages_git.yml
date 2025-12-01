@@ -1,5 +1,5 @@
 ---
-- name: "[git][kali] Install packages"
+- name: "Install packages"
   ansible.builtin.get_url:
     url: "{{ item.url }}"
     dest: "{{ item.dest }}/{{ item.name }}"
@@ -15,7 +15,7 @@
     - kali
     - packages
 
-- name: "[git][kali] Extract archived releases"
+- name: "Extract archived releases"
   ansible.builtin.unarchive:
     src: "{{ item.url }}"
     dest: "{{ item.dest }}"
@@ -29,7 +29,7 @@
     - kali
     - packages
 
-- name: "[git] Clone repositories"
+- name: "Clone repositories"
   ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "{{ item.dest }}/{{ item.name }}"

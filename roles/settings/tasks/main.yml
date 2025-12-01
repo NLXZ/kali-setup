@@ -1,5 +1,5 @@
 ---
-- name: "[settings] Set up LightDM"
+- name: "Configure LightDM"
   ansible.builtin.copy:
     src: files/lightdm/
     dest: /etc/lightdm/
@@ -9,7 +9,7 @@
   tags:
     - settings
 
-- name: "[settings] Set up keyboard layout"
+- name: "Set keyboard layout"
   ansible.builtin.lineinfile:
     path: /etc/default/keyboard
     regexp: '^XKBLAYOUT="us"$'
@@ -17,7 +17,7 @@
   tags:
     - settings
 
-- name: "[settings] Set up time zone"
+- name: "Set time zone"
   ansible.builtin.shell: |
     timedatectl set-ntp 0
     timedatectl set-timezone Europe/Madrid
@@ -25,7 +25,7 @@
   tags:
     - settings
 
-- name: "[settings] Add user to docker group"
+- name: "Add user to Docker group"
   ansible.builtin.user:
     name: "{{ lookup('pipe', 'id -nu 1000') }}"
     groups: docker
@@ -33,9 +33,9 @@
   tags:
     - settings
 
-- name: "[settings] Modify openvpn capabilities"
+- name: "Modify openvpn capabilities"
   ansible.builtin.command: setcap CAP_NET_ADMIN+ep /usr/sbin/openvpn
   register: settings_capabilities
-  changed_when: settings_capabilities.rc != 0
+  changed_when: settings_capabilities.rc == 0
   tags:
     - settings
