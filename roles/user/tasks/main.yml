@@ -26,10 +26,10 @@
 - name: "[user] Change username"
   ansible.builtin.shell: |
     set -o pipefail
-    killall -u "{{ user_current.stdout }}"
-    usermod -l "{{ user_name }}" "{{ user_current.stdout }}"
-    usermod -d "/home/{{ user_name }}" -m "{{ user_name }}"
-    groupmod -n "{{ user_name }}" "{{ user_current.stdout }}"
+    killall -u {{ user_current.stdout }}
+    usermod -l {{ user_name }} {{ user_current.stdout }}
+    usermod -d /home/{{ user_name }} -m {{ user_name }}
+    groupmod -n {{ user_name }} {{ user_current.stdout }}
   when: user_name is defined and user_name != ''
   changed_when: "{{ user_name }} != {{ user_current.stdout }}"
   tags:
