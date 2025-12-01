@@ -18,7 +18,7 @@
       register: reboot
 
     - name: "Reboot"
-      ansible.builtin.shell: "nohup -- bash -c 'sleep 1; echo reboot' &"
+      ansible.builtin.shell: "nohup -- sh -c 'sleep 3; reboot' &"
       async: 0
       poll: 0
       when: reboot.user_input == 'y'

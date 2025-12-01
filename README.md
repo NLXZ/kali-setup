@@ -11,7 +11,7 @@ exit
 ```
 - Login as root:
 ```shell
-pipx ensurepath && pipx install ansible-core
+pipx ensurepath && pipx install --global ansible-core
 git clone https://github.com/NLXZ/kali-setup /tmp/kali-setup
 ansible-playbook /tmp/kali-setup/playbook.yml
 ```
