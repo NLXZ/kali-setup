@@ -36,9 +36,9 @@
     - user
 
 - name: "[user] Change password"
-  ansible.builtin.user:
-    name: "{{ user_name.user_input | default(user_current.stdout) }}"
-    password: "{{ user_pass.user_input | password_hash('sha512') }}"
+  ansible.builtin.shell: |
+    set -o pipefail
+    echo "{{ user_name.user_input | default(user_current.stdout) }}:{{ user_pass.user_input }}" | chpasswd
   when: user_pass.user_input is defined and user_pass.user_input != ''
   changed_when: "user_pass.user_input is defined and user_pass.user_input != ''"
   tags:
