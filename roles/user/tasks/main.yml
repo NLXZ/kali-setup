@@ -20,7 +20,8 @@
   ansible.builtin.command: |
     id -nu 1000
   register: user_current
-  changed_when: false
+  when: "user_name.user_input | length > 0 or user_pass.user_input | length > 0"
+  changed_when: true
   tags:
     - user
 
