@@ -2,7 +2,7 @@
 - name: "[user] Request username"
   ansible.builtin.pause:
     prompt: "Enter the new username (leave blank to skip)"
-    register: "user_name"
+  register: "user_name"
   tags:
     - user
 
@@ -10,7 +10,7 @@
   ansible.builtin.pause:
     prompt: "Enter the new password (leave blank to skip)"
     echo: false
-    register: "user_pass"
+  register: "user_pass"
   tags:
     - user
 
@@ -26,9 +26,10 @@
 - name: "[user] Change username"
   ansible.builtin.shell: |
     set -o pipefail
-    killall -u "{{ user_current.stdout }}" > /dev/null 2>&1
-    usermod -l "{{ user_name }}" -d "/home/{{ user_name }}" -m "{{ user_current.stdout }}" > /dev/null 2>&1
-    groupmod -n "{{ user_name }}" "{{ user_current.stdout }}" > /dev/null 2>&1
+    killall -u "{{ user_current.stdout }}"
+    usermod -l "{{ user_name }}" "{{ user_current.stdout }}"
+    usermod -d "/home/{{ user_name }}" -m "{{ user_name }}"
+    groupmod -n "{{ user_name }}" "{{ user_current.stdout }}"
   when: user_name is defined and user_name != ''
   changed_when: "{{ user_name }} != {{ user_current.stdout }}"
   tags:
