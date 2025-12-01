@@ -38,8 +38,8 @@
 - name: "[user] Change password"
   ansible.builtin.user:
     name: "{{ user_name.user_input | default(user_current.stdout) }}"
-    password: "{{ user_pass | password_hash('sha512') }}"
-  when: user_pass is defined and user_pass != ''
-  changed_when: "user_pass is defined and user_pass != ''"
+    password: "{{ user_pass.user_input | password_hash('sha512') }}"
+  when: user_pass.user_input is defined and user_pass.user_input != ''
+  changed_when: "user_pass.user_input is defined and user_pass.user_input != ''"
   tags:
     - user
