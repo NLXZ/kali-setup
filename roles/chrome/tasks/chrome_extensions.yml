@@ -1,0 +1,89 @@
+---
+- name: "[chrome] Set up extensions settings"
+  ansible.builtin.template:
+    src: "extensions.json.j2"
+    dest: "/etc/opt/chrome/policies/managed/extensions.json"
+    owner: root
+    group: root
+    mode: '0644'
+  tags:
+    - chrome
+
+- name: "[chrome] Start chrome"
+  ansible.builtin.shell: |
+    set -o pipefail
+    Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+    DISPLAY=:99 google-chrome --no-sandbox --disable-gpu > /dev/null 2>&1 &
+  async: 0
+  poll: 0
+  changed_when: false
+  tags:
+    - chrome
+  become: true
+  become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+
+- name: "[chrome] Wait for extension to be installed"
+  ansible.builtin.shell: |
+    set -o pipefail
+
+    id="{{ item.id }}"
+    dir="$HOME/.config/google-chrome/Default/Extensions/$id"
+    opt_dir="$HOME/.config/google-chrome/Default/Local Extension Settings/$id"
+
+    if [ -d "$dir" ] && [ -d "$opt_dir" ]; then
+      exit
+    fi
+
+    while [ ! -d "$dir" ]; do
+      sleep 1
+    done
+    url=$(find "$dir" -name 'options.html' | cut -d/ -f10-)
+    google-chrome "chrome-extension://$id/$url"
+
+    while [ ! -d "$opt_dir" ]; do
+      sleep 1
+    done
+    echo "Installed: $id"
+  register: chrome_result_wait
+  changed_when: "'Installed' in chrome_result_wait.stdout"
+  loop: "{{ chrome_extensions }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - chrome
+  become: true
+  become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+
+- name: "[chrome] Stop chrome"
+  ansible.builtin.command: "killall -w chrome Xvfb"
+  register: chrome_result_stop
+  changed_when: "chrome_result_stop.rc == 0"
+  tags:
+    - chrome
+  become: true
+  become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+
+- name: "Copy extensions configuration"
+  ansible.builtin.copy:
+    src: files/extensions
+    dest: /tmp
+    owner: "{{ lookup('pipe', 'id -nu 1000') }}"
+    group: "{{ lookup('pipe', 'id -nu 1000') }}"
+    mode: '755'
+  tags:
+    - chrome
+
+- name: "[chrome] Set up extensions configuration"
+  ansible.builtin.shell: |
+    set -o pipefail
+    cd /tmp/extensions
+    npm install level
+    node chrome_ext.js config/{{ item.name }}.json {{ item.id }}
+  changed_when: false
+  loop: "{{ chrome_extensions }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - chrome
+  become: true
+  become_user: "{{ lookup('pipe', 'id -nu 1000') }}"

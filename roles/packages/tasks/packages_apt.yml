@@ -1,0 +1,30 @@
+---
+- name: "[apt] Update cache"
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  tags:
+    - apt
+    - packages
+
+- name: "[apt][dotfiles] Install packages"
+  ansible.builtin.apt:
+    pkg: "{{ packages_apt.dotfiles }}"
+  tags:
+    - apt
+    - packages
+    - dotfiles
+
+- name: "[apt][kali] Install packages"
+  ansible.builtin.apt:
+    pkg: "{{ packages_apt.dotfiles }}"
+  tags:
+    - apt
+    - packages
+    - kali
+
+- name: "[apt] Clean up"
+  ansible.builtin.apt:
+    autoremove: true
+    autoclean: true
+  become: true

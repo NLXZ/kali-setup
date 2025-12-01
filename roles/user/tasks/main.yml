@@ -1,0 +1,44 @@
+---
+- name: "[user] Request username"
+  ansible.builtin.pause:
+    name: "user_name"
+    prompt: "Enter the new username (leave blank to skip)"
+  tags:
+    - user
+
+- name: "[user] Request password"
+  ansible.builtin.pause:
+    name: "user_pass"
+    prompt: "Enter the new password (leave blank to skip)"
+    echo: false
+  tags:
+    - user
+
+- name: "[user] Get current username"
+  ansible.builtin.command: |
+    id -nu 1000
+  register: user_current
+  when: user_name is defined and user_name != ''
+  changed_when: false
+  tags:
+    - user
+
+- name: "[user] Change username"
+  ansible.builtin.shell: |
+    set -o pipefail
+    killall -u "{{ user_current.stdout }}" > /dev/null 2>&1
+    usermod -l "{{ user_name }}" -d "/home/{{ user_name }}" -m "{{ user_current.stdout }}" > /dev/null 2>&1
+    groupmod -n "{{ user_name }}" "{{ user_current.stdout }}" > /dev/null 2>&1
+  when: user_name is defined and user_name != ''
+  changed_when: "{{ user_name }} != {{ user_current.stdout }}"
+  tags:
+    - user
+
+- name: "[user] Change password"
+  ansible.builtin.user:
+    name: "{{ user_name | default(user_current.stdout) }}"
+    password: "{{ user_pass | password_hash('sha512') }}"
+  when: user_pass is defined and user_pass != ''
+  changed_when: "user_pass is defined and user_pass != ''"
+  tags:
+    - user

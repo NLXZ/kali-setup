@@ -1,0 +1,138 @@
+---
+packages_apt:
+  dotfiles:
+    - bat
+    - dmenu
+    - eza
+    - feh
+    - flameshot
+    - fonts-jetbrains-mono
+    - fzf
+    - i3-wm
+    - kitty
+    - lxappearance
+    - neovim
+    - polybar
+    - rofi
+    - stow
+    - tmux
+    - xsel
+    - zoxide
+    - zsh
+
+  kali:
+    - bloodhound-ce-python
+    - bloodyad
+    - chisel
+    - docker-compose
+    - donut
+    - fuse
+    - gdb
+    - gdb-peda
+    - ghidra
+    - gobuster
+    - golang
+    - html2text
+    - jq
+    - keepassxc
+    - krb5-config
+    - krb5-user
+    - lftp
+    - libnss3-tools
+    - libpcap-dev
+    - libxml2-dev
+    - libxslt-dev
+    - ltrace
+    - mingw-w64
+    - mono-complete
+    - moreutils
+    - nishang
+    - npm
+    - ntpsec-ntpdate
+    - rdate
+    - remmina
+    - rlwrap
+    - seclists
+    - sshpass
+    - sshuttle
+    - strace
+    - web-cache-vulnerability-scanner
+
+packages_git:
+  releases:
+    - name: "sliver-server"
+      url: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-server_linux"
+      dest: "/usr/local/bin"
+
+    - name: "sliver-client"
+      url: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-client_linux"
+      dest: "/usr/local/bin"
+
+    - name: "opengrep"
+      url: "https://github.com/opengrep/opengrep/releases/download/v1.11.5/opengrep_manylinux_x86"
+      dest: "/usr/local/bin"
+
+    - name: "bloodhound-cli"
+      url: "https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz"
+      dest: "/usr/local/bin"
+      extract: true
+
+  clone:
+    - name: "gf-patterns"
+      repo: "https://github.com/NLXZ/gf-patterns"
+      dest: "/opt/tools"
+      branch: "main"
+
+    - name: "username-anarchy"
+      repo: "https://github.com/urbanadventurer/username-anarchy"
+      dest: "/opt/tools"
+      branch: "master"
+
+    - name: "Corsy"
+      repo: "https://github.com/s0md3v/Corsy"
+      dest: "/opt/tools"
+      branch: "master"
+
+    - name: "smuggler"
+      repo: "https://github.com/defparam/smuggler"
+      dest: "/opt/tools"
+      branch: "master"
+
+packages_go:
+  - github.com/0xpugal/dedupe@latest
+  - github.com/bitquark/shortscan/cmd/shortscan@latest
+  - github.com/devploit/nomore403@latest
+  - github.com/dwisiswant0/crlfuzz/cmd/crlfuzz@latest
+  - github.com/haccer/subjack@latest
+  - github.com/Hackmanit/Web-Cache-Vulnerability-Scanner@latest
+  - github.com/hahwul/dalfox/v2@latest
+  - github.com/lc/gau/v2/cmd/gau@latest
+  - github.com/NLXZ/hacks/kxss@latest
+  - github.com/PentestPad/subzy@latest
+  - github.com/projectdiscovery/alterx/cmd/alterx@latest
+  - github.com/projectdiscovery/chaos-client/cmd/chaos@latest
+  - github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+  - github.com/projectdiscovery/httpx/cmd/httpx@latest
+  - github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest
+  - github.com/projectdiscovery/katana/cmd/katana@latest
+  - github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
+  - github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+  - github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
+  - github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+  - github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
+  - github.com/ropnop/kerbrute@latest
+  - github.com/tomnomnom/assetfinder@latest
+  - github.com/tomnomnom/gf@latest
+  - github.com/tomnomnom/qsreplace@latest
+  - github.com/tomnomnom/unfurl@latest
+
+packages_pipx:
+  - "certipy-ad"
+  - "clairvoyance"
+  - "evil-winrm-py[kerberos]"
+  - "git+https://github.com/login-securite/DonPAPI"
+  - "git+https://github.com/Pennyw0rth/NetExec"
+  - "impacket"
+  - "pywhisker"
+  - "uro"
+  - "uv"

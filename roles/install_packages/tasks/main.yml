@@ -1,9 +1,0 @@
----
-- name: "APT"
-  ansible.builtin.include_tasks: install_packages_apt.yml
-
-- name: "Git"
-  ansible.builtin.include_tasks: install_packages_git.yml
-
-- name: "External"
-  ansible.builtin.include_tasks: install_packages_external.yml

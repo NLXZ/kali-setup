@@ -1,0 +1,44 @@
+---
+- name: "[git][kali] Install packages"
+  ansible.builtin.get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}/{{ item.name }}"
+    owner: "root"
+    group: "root"
+    mode: '755'
+  when: item.extract is not defined
+  loop: "{{ packages_git.releases }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - git
+    - kali
+    - packages
+
+- name: "[git][kali] Extract archived releases"
+  ansible.builtin.unarchive:
+    src: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    remote_src: true
+  when: item.extract is defined
+  loop: "{{ packages_git.releases }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - git
+    - kali
+    - packages
+
+- name: "[git] Clone repositories"
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}/{{ item.name }}"
+    depth: 1
+    version: "{{ item.branch }}"
+  loop: "{{ packages_git.clone }}"
+  loop_control:
+    label: "{{ item.name }}"
+  tags:
+    - git
+    - kali
+    - packages

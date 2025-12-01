@@ -1,0 +1,14 @@
+---
+- name: "[pipx][kali] Install packages"
+  ansible.builtin.command: |
+    pipx install --global {{ item }}
+  changed_when: false
+  loop: "{{ packages_pipx }}"
+  loop_control:
+    label: "{{ item }}"
+  async: 300
+  poll: 0
+  tags:
+    - pipx
+    - kali
+    - packages

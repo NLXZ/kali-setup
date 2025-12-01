@@ -1,0 +1,25 @@
+---
+- name: "Set up Kali Environment"
+  hosts: localhost
+  become: true
+
+  roles:
+    - user
+    - packages
+    - dotfiles
+    - settings
+    - chrome
+    - burpsuite
+
+  tasks:
+    - name: "Finished"
+      ansible.builtin.pause:
+        prompt: "Would you like to reboot the system now? (y/N)"
+      register: reboot
+
+    - name: "Reboot"
+      ansible.builtin.shell: "nohup -- bash -c 'sleep 1; echo reboot' &"
+      async: 0
+      poll: 0
+      when: reboot.user_input == 'y'
+      changed_when: false

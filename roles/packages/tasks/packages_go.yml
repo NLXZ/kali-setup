@@ -1,0 +1,16 @@
+---
+- name: "[go][kali] Install packages"
+  ansible.builtin.command: |
+    go install {{ item }}
+  environment:
+    GOBIN: "/usr/local/bin"
+  changed_when: false
+  loop: "{{ packages_go }}"
+  loop_control:
+    label: "{{ item }}"
+  async: 300
+  poll: 0
+  tags:
+    - go
+    - kali
+    - packages

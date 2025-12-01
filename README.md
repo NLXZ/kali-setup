@@ -11,9 +11,9 @@ exit
 ```
 - Login as root:
 ```shell
+pipx ensurepath && pipx install ansible-core
 git clone https://github.com/NLXZ/kali-setup /tmp/kali-setup
-cd /tmp/kali-setup
-NEW_USER='user' NEW_PASS='pass' sh setup.sh
+ansible-playbook /tmp/kali-setup/playbook.yml
 ```
 
 ## 2. Import FoxyProxy configuration

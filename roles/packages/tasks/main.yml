@@ -1,0 +1,28 @@
+---
+- name: "[apt]"
+  ansible.builtin.include_tasks: packages_apt.yml
+  tags:
+    - apt
+    - kali
+    - packages
+
+- name: "[git]"
+  ansible.builtin.include_tasks: packages_git.yml
+  tags:
+    - git
+    - kali
+    - packages
+
+- name: "[go]"
+  ansible.builtin.include_tasks: packages_go.yml
+  tags:
+    - go
+    - kali
+    - packages
+
+- name: "[pipx]"
+  ansible.builtin.include_tasks: packages_pipx.yml
+  tags:
+    - pipx
+    - kali
+    - packages

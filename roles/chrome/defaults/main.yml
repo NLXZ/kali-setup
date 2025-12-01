@@ -1,0 +1,23 @@
+---
+chrome_files:
+  - src: "files/config/initial_preferences"
+    dest: "/opt/google/chrome/initial_preferences"
+
+  - src: "files/config/policies.json"
+    dest: "/etc/opt/chrome/policies/recommended/policies.json"
+
+  - src: "files/config/extensions.json"
+    dest: "/etc/opt/chrome/policies/managed/extensions.json"
+
+  - src: "files/config/bookmarks.html"
+    dest: "/usr/share/chrome/bookmarks.html"
+
+chrome_extensions:
+  - name: "FoxyProxy"
+    id: "gcknhkkoolaabfmlnjonogaaifnjlfnp"
+
+  - name: "Cookie-Editor"
+    id: "hlkenndednhfkekhgcdicdfddnkalmdm"
+
+  - name: "Wappalyzer"
+    id: "gppongmhjkpfnbhagpmjfkannfbllamg"

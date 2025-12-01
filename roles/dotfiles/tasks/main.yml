@@ -1,0 +1,27 @@
+---
+- name: "[dotfiles] Download the dotfiles"
+  ansible.builtin.git:
+    repo: "https://github.com/NLXZ/dotfiles"
+    dest: "$HOME/.dotfiles"
+    depth: 1
+    version: "main"
+  tags:
+    - dotfiles
+  become: true
+  become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+
+- name: "[dotfiles] Stow user dotfiles"
+  ansible.builtin.command: |
+    stow -R -t $HOME -d $HOME/.dotfiles --adopt .
+  changed_when: true
+  tags:
+    - dotfiles
+  become: true
+  become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+
+- name: "[dotfiles] Stow root dotfiles"
+  ansible.builtin.command: |
+    stow -R -t $HOME -d $HOME/.dotfiles --adopt .
+  changed_when: true
+  tags:
+    - dotfiles
