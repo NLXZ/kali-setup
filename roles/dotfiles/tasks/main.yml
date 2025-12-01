@@ -21,7 +21,7 @@
 
 - name: "[dotfiles] Stow root dotfiles"
   ansible.builtin.command: |
-    stow -R -t $HOME -d $HOME/.dotfiles --adopt .
+    stow -R -t $HOME -d /home/{{ lookup('pipe', 'id -nu 1000') }}/.dotfiles --adopt .
   changed_when: true
   tags:
     - dotfiles

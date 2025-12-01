@@ -3,6 +3,7 @@
   ansible.builtin.pause:
     prompt: "Enter the new username (leave blank to skip)"
   register: "user_name"
+  changed_when: "user_name.user_input | length > 0"
   tags:
     - user
 
@@ -11,6 +12,7 @@
     prompt: "Enter the new password (leave blank to skip)"
     echo: false
   register: "user_pass"
+  changed_when: "user_pass.user_input | length > 0"
   tags:
     - user
 
