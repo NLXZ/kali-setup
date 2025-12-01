@@ -5,6 +5,7 @@
     dest: "$HOME/.dotfiles"
     depth: 1
     version: "main"
+    force: true
   tags:
     - dotfiles
   become: true
