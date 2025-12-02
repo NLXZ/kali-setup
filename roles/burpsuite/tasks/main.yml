@@ -21,7 +21,7 @@
 - name: "Download CA certificate"
   ansible.builtin.get_url:
     url: "http://127.0.0.1:8080/cert"
-    dest: "/usr/local/share/ca-certificates/ca-burpsuite.der"
+    dest: "/usr/local/share/ca-certificates/burpsuite_ca.der"
     force: true
     owner: root
     group: root

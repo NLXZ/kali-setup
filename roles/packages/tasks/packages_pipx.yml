@@ -2,8 +2,8 @@
 - name: "Install packages"
   ansible.builtin.shell: |
     pipx install --global {{ item }}
-  register: packages_pipx_install
-  changed_when: "'seems to be installed' not in packages_pipx_install.stdout"
+  async: 120
+  poll: 0
   loop: "{{ packages_pipx }}"
   loop_control:
     label: "{{ item }}"
