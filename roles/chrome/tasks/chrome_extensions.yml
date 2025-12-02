@@ -37,8 +37,8 @@
   ansible.builtin.shell: |
     set -o pipefail
     id="{{ item.id }}"
-    dir="$HOME/.config/google-chrome/Default/Extensions/$id"
-    url=$(find "$dir" -name "options.html" | cut -d/ -f10-)
+    dir="$HOME/.config/google-chrome/Default/Extensions"
+    url=$(find "$dir/$id" -name "options.html" | cut -d"/" -f10-)
     google-chrome "chrome-extension://$id/$url"
   loop: "{{ chrome_extensions }}"
   loop_control:
