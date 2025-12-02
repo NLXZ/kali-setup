@@ -38,7 +38,7 @@
     set -o pipefail
     id="{{ item.id }}"
     dir="$HOME/.config/google-chrome/Default/Extensions/$id"
-    url=$(find "$dir" -name "options.html" | sed "s|^$dir/$id/[^/]*/||")
+    url=$(find "$dir" -name "options.html" | cut -d/ -f10-)
     google-chrome "chrome-extension://$id/$url"
   loop: "{{ chrome_extensions }}"
   loop_control:
@@ -48,7 +48,7 @@
   tags:
     - chrome
 
-- name: "Wait for extensions to be Initialized"
+- name: "Wait for extensions to be initialized"
   ansible.builtin.wait_for:
     path: "$HOME/.config/google-chrome/Default/Local Extension Settings/{{ item.id }}"
   loop: "{{ chrome_extensions }}"
