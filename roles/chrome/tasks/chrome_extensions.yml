@@ -40,6 +40,7 @@
     dir="$HOME/.config/google-chrome/Default/Extensions"
     url=$(find "$dir/$id" -name "options.html" | cut -d"/" -f10-)
     google-chrome "chrome-extension://$id/$url"
+  changed_when: false
   loop: "{{ chrome_extensions }}"
   loop_control:
     label: "{{ item.name }}"
