@@ -16,7 +16,7 @@ ansible-playbook /tmp/kali-setup/playbook.yml
 ```
 
 ## Manual configurations
-### Burp Suite extensions
+### Burp Suite extensions:
 1. Open Burp Suite
 2. Go to `Extensions` > `BApp Store`
 3. Click twice on `Installed` to sort
