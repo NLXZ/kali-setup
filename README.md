@@ -11,7 +11,7 @@ exit
 ```
 4. Log in as root and run the setup:
 ```shell
-pipx ensurepath && pipx install --global ansible-core
+pipx install --global ansible-core
 git clone https://github.com/NLXZ/kali-setup /tmp/kali-setup
 ansible-playbook /tmp/kali-setup/playbook.yml
 ```

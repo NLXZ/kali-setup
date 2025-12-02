@@ -2,7 +2,8 @@
 - name: "Install packages"
   ansible.builtin.command: |
     pipx install --global {{ item }}
-  changed_when: false
+  register: packages_go_install
+  changed_when: "'seems to be installed' not in packages_go_install.stdout"
   loop: "{{ packages_pipx }}"
   loop_control:
     label: "{{ item }}"

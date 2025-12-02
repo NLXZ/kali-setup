@@ -4,7 +4,9 @@
     go install {{ item }}
   environment:
     GOBIN: "/usr/local/bin"
-  changed_when: false
+  args:
+    creates: "/usr/local/bin/{{ item.split('/')[-1].split('@')[0] }}"
+  register: packages_go_install
   loop: "{{ packages_go }}"
   loop_control:
     label: "{{ item }}"
