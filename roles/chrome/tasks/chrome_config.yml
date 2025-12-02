@@ -1,12 +1,12 @@
 ---
 - name: "Create configuration directories"
   ansible.builtin.file:
-    path: "{{ item.dest | dirname }}"
+    path: "{{ item.dir }}"
     state: directory
     mode: '0755'
-  loop: "{{ chrome_files }}"
+  loop: "{{ chrome_directories }}"
   loop_control:
-    label: "{{ item.dest | dirname }}"
+    label: "{{ item.dir }}"
   tags:
     - chrome
 
