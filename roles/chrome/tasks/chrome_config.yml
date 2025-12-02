@@ -28,9 +28,10 @@
     set -o pipefail
     Xvfb :99 -screen 0 1920x1080x24 &
     timeout 2 sh -c 'DISPLAY=:99 google-chrome --no-sandbox --disable-gpu' &
+  args:
+    creates: "$HOME/.config/google-chrome/Default"
   async: 5
   poll: 0
-  changed_when: false
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
   tags:
