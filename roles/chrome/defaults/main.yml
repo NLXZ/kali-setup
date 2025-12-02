@@ -1,12 +1,10 @@
 ---
 chrome_directories:
-  - dir: "/opt/google/chrome/"
+  - "/opt/google/chrome/"
+  - "/etc/opt/chrome/policies/recommended/"
+  - "/etc/opt/chrome/policies/managed/"
+  - "/usr/share/chrome/"
 
-  - dir: "/etc/opt/chrome/policies/recommended/"
-
-  - dir: "/usr/share/chrome/"
-
-  - dir: "/etc/opt/chrome/policies/managed/"
 
 chrome_files:
   - src: "files/config/initial_preferences"
