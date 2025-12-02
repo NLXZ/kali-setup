@@ -3,6 +3,7 @@
   ansible.builtin.template:
     src: "extensions.json.j2"
     dest: "/etc/opt/chrome/policies/managed/extensions.json"
+    force: false
     owner: root
     group: root
     mode: '0644'
@@ -36,7 +37,7 @@
     timeout 120 bash -c "while [[ ! -d '$ext_dir' ]]; do sleep 1; done" || exit 1
 
     url=$(find "$ext_dir/$id" -name 'options.html' | cut -d/ -f10-)
-    google-chrome "chrome-extension://$id/$url"
+    google-chrome "chrome-extension://$ext_id/$url"
 
     timeout 120 bash -c "while [[ ! -d '$ext_cfg' ]]; do sleep 1; done" || exit 1
 
