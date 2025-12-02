@@ -10,11 +10,11 @@
   tags:
     - chrome
 
-- name: "Start chrome (headless)"
+- name: "Start Chrome (headless)"
   ansible.builtin.shell: |
     set -o pipefail
-    Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
-    DISPLAY=:99 google-chrome --no-sandbox --disable-gpu > /dev/null 2>&1 &
+    Xvfb :99 -screen 0 1920x1080x24 &
+    DISPLAY=:99 google-chrome --no-sandbox --disable-gpu &
   async: 0
   poll: 0
   changed_when: false
@@ -32,9 +32,7 @@
     ext_dir="$profile/Extensions/$ext_id"
     ext_cfg="$profile/Local Extension Settings/$ext_id"
 
-    if [[ -d "$ext_dir" && -d "$ext_cfg" ]]; then
-      exit 0
-    fi
+    bash -c "[[ -d '$ext_dir' && -d '$ext_cfg' ]] && exit 0"
 
     timeout 120 bash -c "while [[ ! -d '$ext_dir' ]]; do sleep 1; done" || exit 1
 
@@ -54,7 +52,7 @@
   tags:
     - chrome
 
-- name: "Stop chrome"
+- name: "Stop Chrome"
   ansible.builtin.command: "killall -w chrome Xvfb"
   register: chrome_stop
   changed_when: "chrome_stop.rc == 0"
