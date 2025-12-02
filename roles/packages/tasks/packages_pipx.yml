@@ -2,13 +2,11 @@
 - name: "Install packages"
   ansible.builtin.shell: |
     pipx install --global {{ item }}
-  register: packages_go_install
-  changed_when: "'seems to be installed' not in packages_go_install.stdout"
+  register: packages_pipx_install
+  changed_when: "'seems to be installed' not in packages_pipx_install.stdout"
   loop: "{{ packages_pipx }}"
   loop_control:
     label: "{{ item }}"
-  async: 300
-  poll: 0
   tags:
     - pipx
     - kali

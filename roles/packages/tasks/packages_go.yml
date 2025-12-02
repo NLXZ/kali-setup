@@ -6,12 +6,9 @@
     GOBIN: "/usr/local/bin"
   args:
     creates: "/usr/local/bin/{{ item.split('/')[-1].split('@')[0] }}"
-  register: packages_go_install
   loop: "{{ packages_go }}"
   loop_control:
     label: "{{ item }}"
-  async: 300
-  poll: 0
   tags:
     - go
     - kali
