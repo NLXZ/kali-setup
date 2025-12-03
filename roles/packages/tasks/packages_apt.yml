@@ -15,7 +15,7 @@
     - packages
     - dotfiles
 
-- name: "Install Kali packages"
+- name: "Install kali packages"
   ansible.builtin.apt:
     pkg: "{{ packages_apt.kali }}"
   tags:
