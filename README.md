@@ -1,8 +1,8 @@
 # kali-setup
-Automated setup for my Kali Linux environment (tested on clean Kali Linux VMware)
+Automated setup for my Kali Linux environment (tested on a clean VMware Kali Linux)
 
 ## Installation
-1. Download the [latest Kali Linux VM](https://www.kali.org/get-kali/#kali-virtual-machines)
+1. Download the [latest Kali Linux](https://www.kali.org/get-kali/#kali-virtual-machines)
 2. Start the VM and switch to tty1 (`Ctrl + Alt + F1`)
 3. Log in as `kali:kali` and set a root password:
 ```shell
