@@ -2,7 +2,8 @@
 - name: "Start Burp Suite (headless)"
   ansible.builtin.shell: |
     set -o pipefail
-    yes y | java -jar -Djava.awt.headless=true /usr/share/burpsuite/burpsuite.jar &
+    yes y | java -jar -Djava.awt.headless=true \
+      /usr/share/burpsuite/burpsuite.jar &
   async: 60
   poll: 0
   changed_when: false
@@ -32,7 +33,9 @@
     - burpsuite
 
 - name: "Import CA certificate"
-  ansible.builtin.command: certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "burpsuite_ca" -i /usr/local/share/ca-certificates/burpsuite_ca.der
+  ansible.builtin.shell: |
+    certutil -d sql:$HOME/.pki/nssdb -A -t "C,," -n "burpsuite_ca" \
+      -i /usr/local/share/ca-certificates/burpsuite_ca.der
   register: burpsuite_import_ca
   changed_when: burpsuite_import_ca.rc == 0
   become: true

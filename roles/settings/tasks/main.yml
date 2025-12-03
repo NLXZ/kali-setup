@@ -9,6 +9,16 @@
   tags:
     - settings
 
+- name: "Configure wallpaper"
+  ansible.builtin.copy:
+    src: "/home/{{ lookup('pipe', 'id -nu 1000') }}/.wallpaper"
+    dest: /usr/share/wallpapers/wallpaper
+    owner: root
+    group: root
+    mode: '644'
+  tags:
+    - settings
+
 - name: "Set keyboard layout"
   ansible.builtin.lineinfile:
     path: /etc/default/keyboard

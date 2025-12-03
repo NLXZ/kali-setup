@@ -62,8 +62,7 @@
 
 - name: "Stop Chrome"
   ansible.builtin.command: "killall -w chrome Xvfb"
-  register: chrome_stop
-  changed_when: "chrome_stop.rc == 0"
+  changed_when: false
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
   tags:
@@ -84,8 +83,9 @@
     set -o pipefail
     cd /tmp/extensions
     npm install level
-    node chrome_ext.js config/{{ item.name }}.json {{ item.id }}
-  changed_when: false
+    node chrome_ext.js config/{{ item.name }}.json {{ item.id }} || exit 1
+  register: chrome_configure_extensions
+  changed_when: "chrome_configure_extensions.rc == 0"
   loop: "{{ chrome_extensions }}"
   loop_control:
     label: "{{ item.name }}"
