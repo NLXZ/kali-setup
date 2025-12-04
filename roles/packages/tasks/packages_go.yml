@@ -1,9 +1,7 @@
 ---
 - name: "Install packages"
   ansible.builtin.shell: |
-    go install {{ item }}
-  environment:
-    GOBIN: "/usr/local/bin"
+    GOBIN=/usr/local/bin go install {{ item }}
   args:
     creates: "/usr/local/bin/{{ item.split('/')[2].split('@')[0] }}"
   async: 120

@@ -3,8 +3,9 @@
   ansible.builtin.shell: |
     set -o pipefail
     pipx install --global {{ item }}
-  register: packages_pipx_install
-  changed_when: "'seems to be installed' not in packages_pipx_install.stdout"
+  changed_when: true
+  async: 120
+  poll: 0
   loop: "{{ packages_pipx }}"
   loop_control:
     label: "{{ item }}"

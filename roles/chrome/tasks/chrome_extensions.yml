@@ -13,7 +13,9 @@
 - name: "Start Chrome (headless)"
   ansible.builtin.shell: |
     set -o pipefail
-    sh -c 'Xvfb :99 -screen 0 1920x1080x24 & DISPLAY=:99 google-chrome --disable-gpu' &
+    Xvfb :99 -screen 0 1920x1080x24 &
+    export DISPLAY=:99
+    google-chrome --no-default-browser-check --no-first-run --disable-gpu &
   async: 0
   poll: 0
   changed_when: false
@@ -41,7 +43,8 @@
     dir="$HOME/.config/google-chrome/Default/Extensions"
     url=$(find "$dir/$id" -name "options.html" | cut -d"/" -f10-)
     google-chrome "chrome-extension://$id/$url"
-  changed_when: false
+  register: chrome_extensions_init
+  changed_when: "'Opening' in chrome_extensions_init.stdout"
   loop: "{{ chrome_extensions }}"
   loop_control:
     label: "{{ item.name }}"
