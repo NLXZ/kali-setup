@@ -4,7 +4,8 @@
     go install {{ item }}
   environment:
     GOBIN: "/usr/local/bin"
-  changed_when: true
+  args:
+    creates: "/usr/local/bin/{{ item.split('/')[2] }}"
   async: 120
   poll: 0
   loop: "{{ packages_go }}"

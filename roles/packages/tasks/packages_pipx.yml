@@ -1,8 +1,9 @@
 ---
 - name: "Install packages"
   ansible.builtin.shell: |
-    pipx install --global {{ item }}
-  changed_when: true
+    set -o pipefail
+    pipx install --global {{ item }} | grep -q 'seems to be installed' && exit 1
+  register: packages_go_install
   async: 120
   poll: 0
   loop: "{{ packages_pipx }}"
@@ -12,3 +13,7 @@
     - pipx
     - kali
     - packages
+
+- name: debug
+  dbg:
+    var: packages_go_install

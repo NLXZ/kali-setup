@@ -13,7 +13,7 @@
 - name: "Start Chrome (headless)"
   ansible.builtin.shell: |
     set -o pipefail
-    Xvfb :99 -screen 0 1920x1080x24 & DISPLAY=:99 google-chrome --disable-gpu &
+    sh -c 'Xvfb :99 -screen 0 1920x1080x24 & DISPLAY=:99 google-chrome --disable-gpu' &
   async: 0
   poll: 0
   changed_when: false
@@ -25,6 +25,7 @@
 - name: "Wait for extensions to be installed"
   ansible.builtin.wait_for:
     path: "$HOME/.config/google-chrome/Default/Extensions/{{ item.id }}"
+    timeout: 120
   loop: "{{ chrome_extensions }}"
   loop_control:
     label: "{{ item.name }}"
@@ -52,6 +53,7 @@
 - name: "Wait for extensions to be initialized"
   ansible.builtin.wait_for:
     path: "$HOME/.config/google-chrome/Default/Local Extension Settings/{{ item.id }}"
+    timeout: 120
   loop: "{{ chrome_extensions }}"
   loop_control:
     label: "{{ item.name }}"

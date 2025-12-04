@@ -26,8 +26,7 @@
 - name: "Create user profile"
   ansible.builtin.shell: |
     set -o pipefail
-    Xvfb :99 -screen 0 1920x1080x24 & DISPLAY=:99 google-chrome --disable-gpu &
-    sleep 5 && killall -w chrome Xvfb
+    timeout 2 sh -c 'Xvfb :99 -screen 0 1920x1080x24 & DISPLAY=:99 google-chrome --disable-gpu'
   args:
     creates: "$HOME/.config/google-chrome/Default"
   become: true
