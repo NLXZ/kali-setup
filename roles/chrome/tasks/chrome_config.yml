@@ -23,13 +23,13 @@
   tags:
     - chrome
 
-- name: "Create user profile"
-  ansible.builtin.shell: |
-    set -o pipefail
-    timeout 2 sh -c 'Xvfb :99 -screen 0 1920x1080x24 & DISPLAY=:99 google-chrome --disable-gpu'
-  args:
-    creates: "$HOME/.config/google-chrome/Default"
-  become: true
-  become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
-  tags:
-    - chrome
+# - name: "Create user profile"
+#   ansible.builtin.shell: |
+#     set -o pipefail
+#     timeout 2 sh -c 'Xvfb :99 -screen 0 1920x1080x24 & DISPLAY=:99 google-chrome --disable-gpu' || true
+#   args:
+#     creates: "$HOME/.config/google-chrome/Default"
+#   become: true
+#   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
+#   tags:
+#     - chrome

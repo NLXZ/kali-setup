@@ -108,7 +108,6 @@ packages_go:
   - github.com/Hackmanit/Web-Cache-Vulnerability-Scanner@latest
   - github.com/hahwul/dalfox/v2@latest
   - github.com/lc/gau/v2/cmd/gau@latest
-  - github.com/NLXZ/hacks/kxss@latest
   - github.com/PentestPad/subzy@latest
   - github.com/projectdiscovery/alterx/cmd/alterx@latest
   - github.com/projectdiscovery/chaos-client/cmd/chaos@latest

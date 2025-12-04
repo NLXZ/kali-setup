@@ -2,10 +2,9 @@
 - name: "Install packages"
   ansible.builtin.shell: |
     set -o pipefail
-    pipx install --global {{ item }} | grep -q 'seems to be installed' && exit 1
-  register: packages_go_install
-  async: 120
-  poll: 0
+    pipx install --global {{ item }}
+  register: packages_pipx_install
+  changed_when: "'seems to be installed' not in packages_pipx_install.stdout"
   loop: "{{ packages_pipx }}"
   loop_control:
     label: "{{ item }}"
