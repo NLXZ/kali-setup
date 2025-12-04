@@ -12,8 +12,8 @@
     - dotfiles
 
 - name: "Stow user dotfiles"
-  ansible.builtin.command: |
-    stow -t $HOME -d $HOME/.dotfiles --adopt .
+  ansible.builtin.shell: |
+    rm $HOME/.zshrc
     stow -R -t $HOME -d $HOME/.dotfiles --adopt .
   changed_when: true
   become: true
@@ -22,7 +22,8 @@
     - dotfiles
 
 - name: "Stow root dotfiles"
-  ansible.builtin.command: |
+  ansible.builtin.shell: |
+    rm $HOME/.zshrc
     stow -t $HOME -d /home/{{ lookup('pipe', 'id -nu 1000') }}/.dotfiles --adopt .
   changed_when: true
   tags:
