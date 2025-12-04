@@ -13,7 +13,3 @@
     - pipx
     - kali
     - packages
-
-- name: debug
-  dbg:
-    var: packages_go_install
