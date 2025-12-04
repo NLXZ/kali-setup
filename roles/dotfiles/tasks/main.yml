@@ -26,3 +26,11 @@
   changed_when: true
   tags:
     - dotfiles
+
+- name: "Install neovim plugins"
+  ansible.builtin.shell: |
+    set -o pipefail
+    cmd='nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"'
+    sudo -- su {{ lookup('pipe', 'id -nu 1000') }} -c "$cmd"
+    sudo -- su root -c "$cmd"
+  changed_when: true
