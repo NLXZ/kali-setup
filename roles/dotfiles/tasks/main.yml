@@ -13,7 +13,7 @@
 
 - name: "Stow user dotfiles"
   ansible.builtin.command: |
-    stow -R -t $HOME -d $HOME/.dotfiles --adopt .
+    stow -t $HOME -d $HOME/.dotfiles --adopt .
   changed_when: true
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
@@ -22,7 +22,7 @@
 
 - name: "Stow root dotfiles"
   ansible.builtin.command: |
-    stow -R -t $HOME -d /home/{{ lookup('pipe', 'id -nu 1000') }}/.dotfiles --adopt .
+    stow -t $HOME -d /home/{{ lookup('pipe', 'id -nu 1000') }}/.dotfiles --adopt .
   changed_when: true
   tags:
     - dotfiles
