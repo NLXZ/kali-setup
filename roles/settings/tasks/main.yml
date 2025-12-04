@@ -11,8 +11,20 @@
 
 - name: "Configure wallpaper"
   ansible.builtin.copy:
-    src: "/home/{{ lookup('pipe', 'id -nu 1000') }}/.wallpaper"
+    src: "/root/.wallpaper"
     dest: /usr/share/wallpapers/wallpaper
+    follow: true
+    owner: root
+    group: root
+    mode: '644'
+  tags:
+    - settings
+
+- name: "Configure skel"
+  ansible.builtin.copy:
+    src: "/root/.zshrc"
+    dest: /etc/skel/.zshrc
+    follow: true
     owner: root
     group: root
     mode: '644'
