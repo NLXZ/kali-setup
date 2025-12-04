@@ -21,18 +21,6 @@
   tags:
     - settings
 
-- name: "Configure skel"
-  ansible.builtin.copy:
-    src: "/root/.zshrc"
-    dest: /etc/skel/.zshrc
-    remote_src: true
-    follow: true
-    owner: root
-    group: root
-    mode: '644'
-  tags:
-    - settings
-
 - name: "Set keyboard layout"
   ansible.builtin.lineinfile:
     path: /etc/default/keyboard
