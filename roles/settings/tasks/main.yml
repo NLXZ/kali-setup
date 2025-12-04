@@ -14,6 +14,7 @@
     src: "/root/.wallpaper"
     dest: /usr/share/wallpapers/wallpaper
     follow: true
+    remote_src: true
     owner: root
     group: root
     mode: '644'
@@ -24,6 +25,7 @@
   ansible.builtin.copy:
     src: "/root/.zshrc"
     dest: /etc/skel/.zshrc
+    remote_src: true
     follow: true
     owner: root
     group: root

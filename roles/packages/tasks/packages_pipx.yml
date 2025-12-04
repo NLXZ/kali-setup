@@ -1,7 +1,6 @@
 ---
 - name: "Install packages"
-  ansible.builtin.shell: |
-    set -o pipefail
+  ansible.builtin.command: |
     pipx install --global {{ item }}
   changed_when: true
   async: 120
