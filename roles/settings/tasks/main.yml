@@ -33,7 +33,7 @@
   ansible.builtin.shell: |
     timedatectl set-ntp 0
     timedatectl set-timezone Europe/Madrid
-  changed_when: false
+  changed_when: true
   tags:
     - settings
 
