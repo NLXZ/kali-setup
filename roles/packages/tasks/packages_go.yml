@@ -5,7 +5,7 @@
   environment:
     GOBIN: "/usr/local/bin"
   changed_when: true
-  async: 120
+  async: 0
   poll: 0
   loop: "{{ packages_go }}"
   loop_control:
