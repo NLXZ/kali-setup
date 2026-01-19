@@ -36,3 +36,11 @@
     sudo -- su {{ lookup('pipe', 'id -nu 1000') }} -c "$cmd"
     sudo -- su root -c "$cmd"
   changed_when: true
+
+- name: "Install nerd fonts"
+  ansible.builtin.shell: |
+    set -o pipefail
+    curl -sfLo /tmp/JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+    sudo unzip -oq /tmp/JetBrainsMono.zip -d /usr/share/fonts/JetBrainsMonoNF
+    sudo fc-cache -fv
+  changed_when: true

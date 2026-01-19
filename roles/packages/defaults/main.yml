@@ -11,7 +11,9 @@ packages_apt:
     - i3-wm
     - kitty
     - lxappearance
+    - mesa-utils
     - neovim
+    - picom
     - polybar
     - rofi
     - stow
