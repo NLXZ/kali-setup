@@ -37,7 +37,6 @@ packages_apt:
     - golang
     - html2text
     - jq
-    - keepassxc
     - krb5-config
     - krb5-user
     - lftp
@@ -56,6 +55,7 @@ packages_apt:
     - remmina
     - rlwrap
     - seclists
+    - sliver
     - sshpass
     - sshuttle
     - strace
@@ -63,14 +63,6 @@ packages_apt:
 
 packages_git:
   releases:
-    - name: "sliver-server"
-      url: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-server_linux"
-      dest: "/usr/local/bin"
-
-    - name: "sliver-client"
-      url: "https://github.com/BishopFox/sliver/releases/latest/download/sliver-client_linux"
-      dest: "/usr/local/bin"
-
     - name: "opengrep"
       url: "https://github.com/opengrep/opengrep/releases/download/v1.11.5/opengrep_manylinux_x86"
       dest: "/usr/local/bin"
