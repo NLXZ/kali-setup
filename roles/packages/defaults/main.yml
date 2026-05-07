@@ -16,7 +16,6 @@ packages_apt:
     - picom
     - polybar
     - rofi
-    - stow
     - tmux
     - xsel
     - zoxide

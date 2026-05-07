@@ -13,8 +13,8 @@
 
 - name: "Stow user dotfiles"
   ansible.builtin.shell: |
-    rm $HOME/.zshrc
-    stow -R -t $HOME -d $HOME/.dotfiles --adopt .
+    rm "$HOME"/.zshrc
+    rsync -a "$HOME"/.dotfiles/ "$HOME"/
   changed_when: true
   become: true
   become_user: "{{ lookup('pipe', 'id -nu 1000') }}"
@@ -23,8 +23,8 @@
 
 - name: "Stow root dotfiles"
   ansible.builtin.shell: |
-    rm $HOME/.zshrc
-    stow -t $HOME -d /home/{{ lookup('pipe', 'id -nu 1000') }}/.dotfiles --adopt .
+    rm "$HOME"/.zshrc
+    rsync -a /home/{{ lookup('pipe', 'id -nu 1000') }}/.dotfiles/ "$HOME"/
   changed_when: true
   tags:
     - dotfiles
@@ -35,7 +35,10 @@
     cmd='nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"'
     sudo -- su {{ lookup('pipe', 'id -nu 1000') }} -c "$cmd"
     sudo -- su root -c "$cmd"
+    sudo update-alternatives --quiet --set vi /usr/bin/nvim
   changed_when: true
+  tags:
+    - dotfiles
 
 - name: "Install nerd fonts"
   ansible.builtin.shell: |
@@ -44,3 +47,5 @@
     sudo unzip -oq /tmp/JetBrainsMono.zip -d /usr/share/fonts/JetBrainsMonoNF
     sudo fc-cache -fv
   changed_when: true
+  tags:
+    - dotfiles

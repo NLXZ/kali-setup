@@ -6,6 +6,7 @@
   tags:
     - apt
     - packages
+    - dotfiles
 
 - name: "Install dotfiles packages"
   ansible.builtin.apt:
@@ -28,3 +29,8 @@
     autoremove: true
     autoclean: true
   become: true
+  tags:
+    - apt
+    - packages
+    - dotfiles
+    - kali
