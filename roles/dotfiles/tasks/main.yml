@@ -11,7 +11,7 @@
   tags:
     - dotfiles
 
-- name: "Stow user dotfiles"
+- name: "Copy user dotfiles"
   ansible.builtin.shell: |
     rm "$HOME"/.zshrc
     rsync -a "$HOME"/.dotfiles/ "$HOME"/
@@ -21,7 +21,7 @@
   tags:
     - dotfiles
 
-- name: "Stow root dotfiles"
+- name: "Copy root dotfiles"
   ansible.builtin.shell: |
     rm "$HOME"/.zshrc
     rsync -a /home/{{ lookup('pipe', 'id -nu 1000') }}/.dotfiles/ "$HOME"/

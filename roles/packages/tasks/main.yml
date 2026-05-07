@@ -4,6 +4,7 @@
   tags:
     - apt
     - kali
+    - dotfiles
     - packages
 
 - name: "Install Git packages"
